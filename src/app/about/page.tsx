@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="space-y-12">
         {/* Header */}
         <div className="space-y-4">
@@ -159,15 +159,6 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* The Grind */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-900">The Grind</h2>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            Whether I'm coding a new feature, running plays on the football field, or strategizing in a competitive game, 
-            I approach everything with the same mindset: <span className="font-semibold text-gray-900">focus on the process, trust the grind, and get better every day.</span>
-          </p>
         </section>
       </div>
     </div>

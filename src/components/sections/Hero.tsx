@@ -15,24 +15,11 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-start space-y-8 text-left order-2 lg:order-1"
         >
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gray-500"></span>
-            </span>
-            <span className="text-sm font-semibold text-gray-700 tracking-wide">
-              [LIVE] 486-Hour OJT Grind
-            </span>
-            <span className="h-4 w-px bg-gray-300"></span>
-            <span className="text-sm text-gray-500 font-medium">Target: April 2026</span>
-          </div>
-
           <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]">
-              Developer. <br />
-              Athlete. <br />
-              Gamer.
+              Kent Elrond <br />
+              Andionne <br />
+              Aspa
             </h1>
             
             <div className="space-y-4">
