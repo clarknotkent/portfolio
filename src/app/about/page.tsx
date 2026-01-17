@@ -15,32 +15,94 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-gray-900">Who I Am</h2>
           <div className="prose prose-gray max-w-none">
             <p className="text-lg text-gray-600 leading-relaxed">
-              I'm a <span className="font-semibold text-gray-900">Developer. Athlete. Gamer.</span> — three passions that define my daily grind.
-            </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Currently pursuing my IT degree and deep in the trenches of a <span className="font-semibold text-gray-900">486-hour OJT program</span> (Target: April 2026). 
-              I'm building my foundation in full-stack development, sharpening my skills in Vue.js, Node.js, Express, and Supabase through real-world projects.
+              I'm Kent, a passionate learner aspiring to make an impact as a Software Engineer and Project Manager. 
+              I love tackling complex problems, from building full-stack applications to leading development teams. 
+              My competitive spirit keeps me busy—whether I'm playing video games or out on the field playing Flag Football.
             </p>
           </div>
         </section>
 
-        {/* Education & OJT */}
+        {/* Education */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-900">Education & Training</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Education</h2>
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">IT Student</h3>
-              <p className="text-gray-600">Building foundation in full-stack development</p>
+              <h3 className="text-lg font-semibold text-gray-900">Ateneo de Davao University</h3>
+              <p className="text-gray-600">Bachelor of Science in Information Technology</p>
+              <p className="text-sm text-gray-500">2022 – 2026</p>
+              <p className="text-sm text-gray-500 mt-1">QPI: 3.xx (Pending calculation)</p>
             </div>
-            <div className="pt-4 border-t border-gray-200">
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gray-500"></span>
-                </span>
-                <span className="text-sm font-semibold text-gray-700">486-Hour OJT Program (In Progress)</span>
+          </div>
+        </section>
+
+        {/* Organizations */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-900">Organizations</h2>
+          <div className="space-y-4">
+            {/* ACCESS */}
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                ACCESS (Ateneo Circle of Computer Enthusiasts for Study and Success)
+              </h3>
+              <div className="space-y-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                  <span><span className="font-medium text-gray-700">Executive Vice President</span> | May 2025 – Present</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                  <span><span className="font-medium text-gray-700">President</span> | January 2024 – May 2025</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                  <span><span className="font-medium text-gray-700">Internal Vice President</span> | April 2023 – December 2023</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                  <span><span className="font-medium text-gray-700">Member</span> | August 2022 – Present</span>
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mt-2 ml-6">Target Completion: April 2026</p>
+            </div>
+
+            {/* Davao Legionnaires */}
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Davao Legionnaires Flag Football Team
+              </h3>
+              <p className="text-sm text-gray-600">
+                <span className="font-medium text-gray-700">Active Player</span> | 2022 – Present
+              </p>
+            </div>
+
+            {/* DICE */}
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                DICE (Davao Interschool Computer Enthusiasts)
+              </h3>
+              <p className="text-sm text-gray-600">
+                <span className="font-medium text-gray-700">Community Member</span> | September 2023 – Present
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Volunteering */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-900">Volunteering (Photographer)</h2>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <div className="space-y-3 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                <span><span className="font-medium text-gray-700">UXPH</span> | August 2025 – September 2025</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                <span><span className="font-medium text-gray-700">UX Davao</span> | January 2024 – Present</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                <span><span className="font-medium text-gray-700">Devcon Davao</span> | May 2024 – June 2024</span>
+              </div>
             </div>
           </div>
         </section>
@@ -48,12 +110,54 @@ export default function AboutPage() {
         {/* Tech Stack */}
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-gray-900">Tech Stack</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {["Vue.js", "Node.js", "Express", "Supabase", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"].map((tech) => (
-              <div key={tech} className="px-4 py-3 bg-white border border-gray-200 rounded-lg text-center text-sm font-medium text-gray-700">
-                {tech}
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Frontend</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["Vue.js", "React.js", "Next.js", "Flutter"].map((tech) => (
+                  <div key={tech} className="px-4 py-3 bg-white border border-gray-200 rounded-lg text-center text-sm font-medium text-gray-700">
+                    {tech}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Backend</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["Supabase", "Firebase"].map((tech) => (
+                  <div key={tech} className="px-4 py-3 bg-white border border-gray-200 rounded-lg text-center text-sm font-medium text-gray-700">
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Languages</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["TypeScript", "JavaScript"].map((tech) => (
+                  <div key={tech} className="px-4 py-3 bg-white border border-gray-200 rounded-lg text-center text-sm font-medium text-gray-700">
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Certifications */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-900">Certifications</h2>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <div className="space-y-3 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                <span><span className="font-medium text-gray-700">Introduction to Project Management</span> | Issued by IBM (via Coursera)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                <span><span className="font-medium text-gray-700">CCNA: Introduction to Networks</span> | Issued by Cisco</span>
+              </div>
+            </div>
           </div>
         </section>
 
