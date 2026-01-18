@@ -16,11 +16,11 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1E293B] border-b border-[#334155]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Brand - Text Based w/ Regular Font Weight for Minimalist look */}
-          <Link href="/" className="text-xl font-bold text-gray-900 tracking-tight">
+          <Link href="/" className="text-xl font-bold text-white tracking-tight">
             Portfolio
           </Link>
 
@@ -33,8 +33,8 @@ export function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    "text-sm font-medium transition-colors hover:text-gray-900",
-                    isActive ? "text-gray-900 font-semibold" : "text-gray-500"
+                    "text-sm font-medium transition-colors hover:text-[#00D9FF]",
+                    isActive ? "text-[#00D9FF] font-semibold" : "text-[#94A3B8]"
                   )}
                 >
                   {item.name}
@@ -45,7 +45,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button - Placeholder */}
           <div className="md:hidden">
-            <button className="text-gray-500 hover:text-gray-900">
+            <button className="text-[#94A3B8] hover:text-[#00D9FF]">
               <span className="sr-only">Open menu</span>
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

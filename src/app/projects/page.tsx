@@ -23,8 +23,8 @@ export default function ProjectsPage() {
           transition={{ duration: 0.5 }}
           className="space-y-4"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Project Showcase</h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Project Showcase</h1>
+          <p className="text-xl text-[#94A3B8]">
             A unified hub of my technical projects, PC builds, and creative endeavors.
           </p>
         </motion.div>
@@ -34,7 +34,7 @@ export default function ProjectsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="border-b border-gray-200"
+          className="border-b border-[#334155]"
         >
           <div className="flex gap-8">
             {categories.map((category) => (
@@ -43,8 +43,8 @@ export default function ProjectsPage() {
                 onClick={() => setActiveCategory(category)}
                 className={`pb-4 px-1 border-b-2 transition-colors ${
                   activeCategory === category
-                    ? "border-gray-900 text-gray-900 font-semibold"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-[#00D9FF] text-[#00D9FF] font-semibold"
+                    : "border-transparent text-[#94A3B8] hover:text-[#00D9FF] hover:border-[#00D9FF]/50"
                 }`}
               >
                 {category}
@@ -74,25 +74,25 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors h-full"
+                      className="block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#00D9FF]/50 transition-colors h-full"
                     >
                       <div className="space-y-4">
                         {/* Role */}
                         {project.role && (
                           <div className="text-sm">
-                            <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded border border-gray-200">
+                            <span className="px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]">
                               {project.role}
                             </span>
                           </div>
                         )}
 
                         {/* Title */}
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-white">
                           {project.title}
                         </h2>
 
                         {/* Description */}
-                        <p className="text-gray-600 leading-relaxed">
+                        <p className="text-[#94A3B8] leading-relaxed">
                           {project.description}
                         </p>
 
@@ -102,7 +102,7 @@ export default function ProjectsPage() {
                             {project.techStack.map((tech) => (
                               <span
                                 key={tech}
-                                className="text-xs px-2 py-1 bg-gray-50 text-gray-700 rounded border border-gray-200"
+                                className="text-xs px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]"
                               >
                                 {tech}
                               </span>
@@ -128,37 +128,37 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block bg-white border border-gray-200 rounded-lg p-8 hover:border-gray-300 transition-colors"
+                      className="block bg-[#1E293B] border border-[#334155] rounded-lg p-8 hover:border-[#00D9FF]/50 transition-colors"
                     >
                       <div className="space-y-6">
                         {/* Header */}
                         <div className="space-y-2">
                           <div className="text-sm">
-                            <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded border border-gray-200">
+                            <span className="px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]">
                               {project.role}
                             </span>
                           </div>
-                          <h2 className="text-2xl font-semibold text-gray-900">
+                          <h2 className="text-2xl font-semibold text-white">
                             {project.title}
                           </h2>
-                          <p className="text-gray-600 leading-relaxed">
+                          <p className="text-[#94A3B8] leading-relaxed">
                             {project.description}
                           </p>
                         </div>
 
                         {/* Spec Sheet */}
                         {project.components && (
-                          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-4">
+                          <div className="bg-[#0F172A] border border-[#334155] rounded-lg p-6">
+                            <h3 className="text-sm font-semibold text-white mb-4">
                               SPECIFICATIONS
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                               {project.components.map((component, idx) => (
                                 <div
                                   key={idx}
-                                  className="flex items-center gap-2 text-sm text-gray-700"
+                                  className="flex items-center gap-2 text-sm text-[#94A3B8]"
                                 >
-                                  <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                  <div className="w-1 h-1 bg-[#00D9FF] rounded-full"></div>
                                   <span>{component}</span>
                                 </div>
                               ))}
@@ -184,16 +184,16 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors h-full"
+                      className="block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#00D9FF]/50 transition-colors h-full"
                     >
                       <div className="space-y-4">
                         {/* Title */}
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-white">
                           {project.title}
                         </h2>
 
                         {/* Description */}
-                        <p className="text-gray-600 leading-relaxed">
+                        <p className="text-[#94A3B8] leading-relaxed">
                           {project.description}
                         </p>
 
@@ -202,9 +202,9 @@ export default function ProjectsPage() {
                           {Array.from({ length: Math.min(project.imageCount || 6, 6) }).map((_, i) => (
                             <div
                               key={i}
-                              className="aspect-square bg-gray-100 border border-gray-200 rounded flex items-center justify-center"
+                              className="aspect-square bg-[#0F172A] border border-[#334155] rounded flex items-center justify-center"
                             >
-                              <span className="text-xs text-gray-400">{i + 1}</span>
+                              <span className="text-xs text-[#94A3B8]">{i + 1}</span>
                             </div>
                           ))}
                         </div>

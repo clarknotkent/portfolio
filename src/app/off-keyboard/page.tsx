@@ -36,7 +36,7 @@ function GallerySlideshow({ images }: GallerySlideshowProps) {
   return (
     <div className="relative mt-6">
       {/* Slideshow Container */}
-      <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
+      <div className="relative aspect-video bg-[#0F172A] rounded-lg overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -48,7 +48,7 @@ function GallerySlideshow({ images }: GallerySlideshowProps) {
           >
             {imageError[currentIndex] ? (
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-gray-400 text-center px-4">{images[currentIndex].alt}</span>
+                <span className="text-[#94A3B8] text-center px-4">{images[currentIndex].alt}</span>
               </div>
             ) : (
               <Image
@@ -68,19 +68,19 @@ function GallerySlideshow({ images }: GallerySlideshowProps) {
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center border border-gray-200 transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#1E293B]/80 hover:bg-[#1E293B] rounded-full flex items-center justify-center border border-[#334155] transition-colors"
               aria-label="Previous slide"
             >
-              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[#00D9FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center border border-gray-200 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#1E293B]/80 hover:bg-[#1E293B] rounded-full flex items-center justify-center border border-[#334155] transition-colors"
               aria-label="Next slide"
             >
-              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[#00D9FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -96,7 +96,7 @@ function GallerySlideshow({ images }: GallerySlideshowProps) {
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
+                index === currentIndex ? "bg-[#00D9FF]" : "bg-[#334155] hover:bg-[#94A3B8]"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -118,8 +118,8 @@ export default function OffKeyboardPage() {
           transition={{ duration: 0.5 }}
           className="space-y-4"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Off-Keyboard</h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Off-Keyboard</h1>
+          <p className="text-xl text-[#94A3B8]">
             Going AFK - Life outside Tech
           </p>
         </motion.div>
@@ -132,14 +132,14 @@ export default function OffKeyboardPage() {
           className="space-y-6"
         >
           <div className="flex items-center gap-3">
-            <div className="h-1 w-12 bg-gray-300"></div>
-            <h2 className="text-2xl font-semibold text-gray-900">Flag Football</h2>
+            <div className="h-1 w-12 bg-[#00D9FF]"></div>
+            <h2 className="text-2xl font-semibold text-white">Flag Football</h2>
           </div>
           
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-8">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Fun, Competitive Spirit and Teamwork</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-lg font-semibold text-white">Fun, Competitive Spirit and Teamwork</h3>
+              <p className="text-[#94A3B8] leading-relaxed">
                 Flag football is my ultimate escape—it's a way for me to step away from the screen, forget my problems, and just have fun on the field. 
                 It's a chance for me to bond with people that are from different backgrounds; the one thing we all have in common is our shared love for 
                 American Football or the NFL. This sport introduced me to a growing community and gave me the chance to travel throughout the country to 
@@ -166,14 +166,14 @@ export default function OffKeyboardPage() {
           className="space-y-6"
         >
           <div className="flex items-center gap-3">
-            <div className="h-1 w-12 bg-gray-300"></div>
-            <h2 className="text-2xl font-semibold text-gray-900">Event Photography</h2>
+            <div className="h-1 w-12 bg-[#00D9FF]"></div>
+            <h2 className="text-2xl font-semibold text-white">Event Photography</h2>
           </div>
           
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-8">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Capturing the Moment</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-lg font-semibold text-white">Capturing the Moment</h3>
+              <p className="text-[#94A3B8] leading-relaxed">
                 When I'm not at my desk, I often volunteer to be the event photographer for local tech gatherings. I focus on capturing candid, 
                 unscripted moments throughout events hosted by organizations like UX Davao, Devcon Davao, and UXPH. I prefer to document the real 
                 interactions that happen when the community comes together.
@@ -199,14 +199,14 @@ export default function OffKeyboardPage() {
           className="space-y-6"
         >
           <div className="flex items-center gap-3">
-            <div className="h-1 w-12 bg-gray-300"></div>
-            <h2 className="text-2xl font-semibold text-gray-900">Community Building</h2>
+            <div className="h-1 w-12 bg-[#00D9FF]"></div>
+            <h2 className="text-2xl font-semibold text-white">Community Building</h2>
           </div>
           
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-8">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Collaboration with Fellow Students</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-lg font-semibold text-white">Collaboration with Fellow Students</h3>
+              <p className="text-[#94A3B8] leading-relaxed">
                 A large part of my time is spent within ACCESS, focusing on the power of student collaboration. I believe in the importance of building 
                 a space where all students from the Ateneo's Computer Studies Cluster can learn from one another and grow together. It's about more than just tech; it's about creating a supportive 
                 environment where we can share ideas, tackle challenges as a group, and build a network that extends beyond the classroom.

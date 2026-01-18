@@ -37,8 +37,8 @@ export default function ContactPage() {
       <div className="space-y-16">
         {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">Get In Touch</h1>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+          <h1 className="text-5xl md:text-6xl font-bold text-white">Get In Touch</h1>
+          <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed">
             Whether you want to discuss a project, collaborate, or just connect — I'm always open to new opportunities and conversations.
           </p>
         </div>
@@ -46,10 +46,10 @@ export default function ContactPage() {
         {/* Social Links Section */}
         <section className="space-y-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-2">
-            <h2 className="text-3xl font-semibold text-gray-900">Find Me Online</h2>
-            <div className="bg-gray-50 border border-gray-200 rounded-lg px-5 py-3">
-              <p className="text-sm text-gray-600">
-                I typically respond within <span className="font-semibold text-gray-900">24-48 hours</span>
+            <h2 className="text-3xl font-semibold text-white">Find Me Online</h2>
+            <div className="bg-[#1E293B] border border-[#334155] rounded-lg px-5 py-3">
+              <p className="text-sm text-[#94A3B8]">
+                I typically respond within <span className="font-semibold text-white">24-48 hours</span>
               </p>
             </div>
           </div>
@@ -61,18 +61,18 @@ export default function ContactPage() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-8 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all group"
+                className="block p-8 bg-[#1E293B] border border-[#334155] rounded-lg hover:border-[#00D9FF]/50 hover:shadow-sm transition-all group"
               >
                 <div className="flex items-start justify-between">
                   <div className="space-y-2 flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 group-hover:text-black transition-colors">
+                    <h3 className="text-xl font-semibold text-white group-hover:text-[#00D9FF] transition-colors">
                       {social.platform}
                     </h3>
-                    <p className="text-sm text-gray-500 font-mono break-all">{social.handle}</p>
-                    <p className="text-sm text-gray-600 pt-1">{social.description}</p>
+                    <p className="text-sm text-[#94A3B8] font-mono break-all">{social.handle}</p>
+                    <p className="text-sm text-[#94A3B8] pt-1">{social.description}</p>
                   </div>
                   <svg
-                    className="h-5 w-5 text-gray-400 group-hover:text-gray-900 transition-colors flex-shrink-0 ml-4"
+                    className="h-5 w-5 text-[#94A3B8] group-hover:text-[#00D9FF] transition-colors flex-shrink-0 ml-4"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

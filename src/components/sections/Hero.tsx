@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 export function Hero() {
   return (
-    <div className="relative flex items-center justify-center p-8 bg-white border-b border-gray-100 py-20 lg:py-32">
+    <div className="relative flex items-center justify-center p-8 bg-[#0F172A] py-20 lg:py-32">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         
         {/* Left Column: Content */}
@@ -16,18 +17,18 @@ export function Hero() {
           className="flex flex-col items-start space-y-8 text-left order-2 lg:order-1"
         >
           <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
               Kent Elrond <br />
               Andionne <br />
               Aspa
             </h1>
             
             <div className="space-y-4">
-              <blockquote className="text-xl text-gray-500 italic border-l-4 border-gray-300 pl-4">
-                "I’m just a simple man, trying to make my way in the universe."
+              <blockquote className="text-xl text-[#94A3B8] italic border-l-4 border-[#00D9FF] pl-4">
+                "I'm just a simple man, trying to make my way in the universe."
               </blockquote>
               
-              <p className="max-w-xl text-lg text-gray-600 leading-relaxed font-light">
+              <p className="max-w-xl text-lg text-[#94A3B8] leading-relaxed font-light">
                 I love technology, gaming, and sports. I'm currently an IT student building my foundation in full-stack development. Whether I’m out on the football field, playing video games, or diving into a new project, I’m just focused on the grind and getting better every day.
               </p>
             </div>
@@ -46,26 +47,29 @@ export function Hero() {
           {/* Social Icons Placeholder */}
           <div className="flex items-center gap-6 pt-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-6 w-6 bg-gray-300 rounded-sm hover:bg-gray-400 transition-colors cursor-pointer" />
+              <div key={i} className="h-6 w-6 bg-[#334155] rounded-sm hover:bg-[#00D9FF] transition-colors cursor-pointer" />
             ))}
           </div>
 
         </motion.div>
 
-        {/* Right Column: Hero Image Placeholder */}
+        {/* Right Column: Profile Photo */}
         <motion.div
            initial={{ opacity: 0, scale: 0.95 }}
            animate={{ opacity: 1, scale: 1 }}
            transition={{ duration: 0.5, delay: 0.1 }}
            className="relative flex justify-center lg:justify-end order-1 lg:order-2"
         >
-          {/* Geometric Shape Container */}
-          <div className="relative w-full aspect-square max-w-[500px] bg-gray-100 rounded-[2rem] border border-gray-200 flex items-center justify-center">
-            <div className="text-center space-y-2">
-              <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 border-4 border-white shadow-sm"></div>
-              <p className="text-gray-500 font-medium text-lg uppercase tracking-widest">Hero Image</p>
-              <p className="text-gray-400 text-sm">Profile Photo Placeholder</p>
-            </div>
+          {/* Profile Photo Container */}
+          <div className="relative w-full aspect-square max-w-[500px] bg-[#1E293B] rounded-[2rem] border border-[#334155] overflow-hidden">
+            <Image
+              src="/images/profile/561751792_24830002459993972_4220551045555156543_n.jpg"
+              alt="Kent Elrond Andionne Aspa"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 500px"
+            />
           </div>
         </motion.div>
 
