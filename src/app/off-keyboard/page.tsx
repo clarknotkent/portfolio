@@ -140,8 +140,8 @@ export default function OffKeyboardPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-white">Fun, Competitive Spirit and Teamwork</h3>
               <p className="text-[#94A3B8] leading-relaxed">
-                Flag football is my ultimate escape—it's a way for me to step away from the screen, forget my problems, and just have fun on the field. 
-                It's a chance for me to bond with people that are from different backgrounds; the one thing we all have in common is our shared love for 
+                Flag football is my ultimate escape—it&apos;s a way for me to step away from the screen, forget my problems, and just have fun on the field. 
+                It&apos;s a chance for me to bond with people that are from different backgrounds; the one thing we all have in common is our shared love for 
                 American Football or the NFL. This sport introduced me to a growing community and gave me the chance to travel throughout the country to 
                 compete in Iligan, Cagayan de Oro, Manila, Malaybalay, and Davao.
               </p>
@@ -174,7 +174,7 @@ export default function OffKeyboardPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-white">Capturing the Moment</h3>
               <p className="text-[#94A3B8] leading-relaxed">
-                When I'm not at my desk, I often volunteer to be the event photographer for local tech gatherings. I focus on capturing candid, 
+                When I&apos;m not at my desk, I often volunteer to be the event photographer for local tech gatherings. I focus on capturing candid, 
                 unscripted moments throughout events hosted by organizations like UX Davao, Devcon Davao, and UXPH. I prefer to document the real 
                 interactions that happen when the community comes together.
               </p>
@@ -208,7 +208,7 @@ export default function OffKeyboardPage() {
               <h3 className="text-lg font-semibold text-white">Collaboration with Fellow Students</h3>
               <p className="text-[#94A3B8] leading-relaxed">
                 A large part of my time is spent within ACCESS, focusing on the power of student collaboration. I believe in the importance of building 
-                a space where all students from the Ateneo's Computer Studies Cluster can learn from one another and grow together. It's about more than just tech; it's about creating a supportive 
+                a space where all students from the Ateneo&apos;s Computer Studies Cluster can learn from one another and grow together. It&apos;s about more than just tech; it&apos;s about creating a supportive 
                 environment where we can share ideas, tackle challenges as a group, and build a network that extends beyond the classroom.
               </p>
               

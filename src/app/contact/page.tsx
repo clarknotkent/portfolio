@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function ContactPage() {
   const socialLinks = [
     {
@@ -36,15 +40,25 @@ export default function ContactPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="space-y-16">
         {/* Header */}
-        <div className="space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-4"
+        >
           <h1 className="text-5xl md:text-6xl font-bold text-white">Get In Touch</h1>
           <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed">
-            Whether you want to discuss a project, collaborate, or just connect — I'm always open to new opportunities and conversations.
+            Whether you want to discuss a project, collaborate, or just connect — I&apos;m always open to new opportunities and conversations.
           </p>
-        </div>
+        </motion.div>
 
         {/* Social Links Section */}
-        <section className="space-y-8">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="space-y-8"
+        >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-2">
             <h2 className="text-3xl font-semibold text-white">Find Me Online</h2>
             <div className="bg-[#1E293B] border border-[#334155] rounded-lg px-5 py-3">
@@ -88,7 +102,7 @@ export default function ContactPage() {
               </a>
             ))}
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   );

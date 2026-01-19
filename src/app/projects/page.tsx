@@ -2,6 +2,7 @@
 
 import { projects } from "@/lib/projects";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -74,7 +75,7 @@ export default function ProjectsPage() {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#00D9FF]/50 transition-colors h-full"
+                      className="block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#6366F1]/50 transition-colors h-full"
                     >
                       <div className="space-y-4">
                         {/* Role */}
@@ -91,9 +92,9 @@ export default function ProjectsPage() {
                           {project.title}
                         </h2>
 
-                        {/* Description */}
-                        <p className="text-[#94A3B8] leading-relaxed">
-                          {project.description}
+                        {/* Short Description */}
+                        <p className="text-[#94A3B8] leading-relaxed text-justify">
+                          {project.shortDescription || project.description}
                         </p>
 
                         {/* Tech Stack */}
@@ -141,7 +142,7 @@ export default function ProjectsPage() {
                           <h2 className="text-2xl font-semibold text-white">
                             {project.title}
                           </h2>
-                          <p className="text-[#94A3B8] leading-relaxed">
+                          <p className="text-[#94A3B8] leading-relaxed text-justify">
                             {project.description}
                           </p>
                         </div>
@@ -193,20 +194,37 @@ export default function ProjectsPage() {
                         </h2>
 
                         {/* Description */}
-                        <p className="text-[#94A3B8] leading-relaxed">
+                        <p className="text-[#94A3B8] leading-relaxed text-justify">
                           {project.description}
                         </p>
 
                         {/* Image Grid Preview */}
                         <div className="grid grid-cols-3 gap-2 pt-2">
-                          {Array.from({ length: Math.min(project.imageCount || 6, 6) }).map((_, i) => (
-                            <div
-                              key={i}
-                              className="aspect-square bg-[#0F172A] border border-[#334155] rounded flex items-center justify-center"
-                            >
-                              <span className="text-xs text-[#94A3B8]">{i + 1}</span>
-                            </div>
-                          ))}
+                          {project.slug === "photography-portfolio" ? (
+                            Array.from({ length: 6 }).map((_, i) => (
+                              <div
+                                key={i}
+                                className="relative aspect-square bg-[#0F172A] border border-[#334155] rounded overflow-hidden"
+                              >
+                                <Image
+                                  src={`/images/photography/${i + 1}.JPG`}
+                                  alt={`Photography ${i + 1}`}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(max-width: 768px) 33vw, 16vw"
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            Array.from({ length: Math.min(project.imageCount || 6, 6) }).map((_, i) => (
+                              <div
+                                key={i}
+                                className="aspect-square bg-[#0F172A] border border-[#334155] rounded flex items-center justify-center"
+                              >
+                                <span className="text-xs text-[#94A3B8]">{i + 1}</span>
+                              </div>
+                            ))
+                          )}
                         </div>
                       </div>
                     </Link>

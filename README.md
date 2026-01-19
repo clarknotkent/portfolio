@@ -1,26 +1,37 @@
-# Kent Elrond Andionne Aspa - Portfolio
+# Clarknotkent Portfolio
 
-A personal portfolio showcasing projects, experience, and interests. Built with Next.js, featuring a clean grayscale wireframe design.
+Professional portfolio showcasing software engineering projects, PC builds, and creative works. Built with Next.js 16.1.3 and modern web technologies.
 
 ## Project Status
-**Phase:** Low/Mid Fidelity → Ready for High Fidelity Design
-- ✅ Core structure and layout complete
-- ✅ All content pages implemented
-- ✅ Image galleries with slideshows
-- ✅ Contact information and social links
-- 🎨 Ready for visual polish and final design
+**Phase:** High Fidelity Design ✅
+- ✅ Professional Deep Slate theme with Electric Indigo accents
+- ✅ Complete project showcase with professional descriptions
+- ✅ Instagram-style photography gallery with EXIF metadata
+- ✅ Interactive modal viewer with navigation
+- ✅ Responsive design with optimized image loading
+- ✅ Social media integration
 
 ## Tech Stack
-- **Framework:** Next.js 16.1.3 (App Router)
-- **Styling:** Tailwind CSS v4 (Grayscale wireframe design)
+- **Framework:** Next.js 16.1.3 (App Router, Turbopack)
+- **Styling:** Tailwind CSS v4 with custom design system
 - **Animations:** Framer Motion 12.26.2
 - **Language:** TypeScript
-- **Image Optimization:** Next.js Image component
-
-## Features
-- **Project Showcase:** Categorized portfolio (Software Engineering, PC Building, Creative Works)
-- **About Page:** Education, organizations, volunteering, tech stack, and certifications
-- **Off-Keyboard:** Personal interests with image slideshows (Flag Football, Event Photography, Community Building)
+- **Metadata:** exifr for EXIF data extraction
+- **Typography:** Inter font family (Google Fonts)
+- **Image Optimization:** Next.js Image component with WebP support
+with detail pages
+  - Software Engineering: NIP Immunization System, Health Key Pharma, UniVents
+  - PC Building: Custom builds with full specifications
+  - Creative Works: Photography portfolio with 11 images, Digital Art showcase
+- **Photography Gallery:** Instagram-style modal viewer
+  - Full EXIF metadata display (Camera, Lens, Settings, Date)
+  - Next/Previous navigation
+  - Responsive split-screen layout
+  - Optimized image loading
+- **About Page:** Education (Ateneo de Davao), ACCESS leadership, volunteering, certifications
+- **Off-Keyboard:** Flag Football, Event Photography, Community Building with galleries
+- **Contact:** Email, GitHub, LinkedIn, Instagram with SVG icons
+- **Design System:** Deep Slate (#0F172A) background, Electric Indigo (#6366F1) accents, 8px grid systemtball, Event Photography, Community Building)
 - **Contact:** Social links with optimized layout
 - **Responsive Design:** Mobile-first approach with consistent spacing
 
@@ -58,24 +69,51 @@ src/
 │   ├── common/
 │   │   ├── Navbar.tsx          # Navigation component
 │   │   └── Footer.tsx          # Footer with copyright
-│   ├── sections/
+│   ├── sectphotography/         # 11 professional photos with EXIF data
+        ├── digital-art/         # Digital art showcase (8 images)
+        ├── ions/
 │   │   └── Hero.tsx            # Hero section component
 │   └── ui/
 │       └── Button.tsx          # Reusable button component
 ├── lib/
-│   └── projects.ts             # Project data store
-└── public/
-    └── images/
-        ├── flag-football/       # Flag football images
+  - Background: Deep Slate (#0F172A)
+  - Primary: Electric Indigo (#6366F1)
+  - Primary Hover: (#4F46E5)
+  - Cards: Slate Gray (#1E293B)
+  - Border: (#334155)
+  - Text Primary: White (#FFFFFF)
+  - Text Secondary: (#94A3B8)
+- **Typography:** Inter font family, bold headings with -0.02em letter spacing
+- **Spacing:** 8px grid system (all padding/margins in multiples of 8px)
+- **Layout:** max-w-4xl/max-w-6xl with consistent container widths
+- **Components:** Slate Gray cards, Electric Indigo buttons, subtle hover transition
         ├── event-photography/   # Event photography images
         └── community-building/  # Community building images
 ```
 
-## Design System
-- **Colors:** Strict grayscale palette (gray-50 to gray-900, white, black)
-- **Typography:** Responsive scaling (text-sm to text-6xl)
-- **Spacing:** Consistent padding and margins (py-12, space-y-12, etc.)
-- **Layout:** max-w-6xl for content alignment with navbar
+  - NIP Immunization System (Capstone/Thesis, Service Learning)
+  - Health Key Pharma (Systems Analysis & Design)
+  - UniVents (Multi-Platform App Development)
+  - PC Build: Aelio (Intel i7-12700F, RTX 4070 Ti SUPER)
+  - Photography Portfolio (11 images with EXIF metadata)
+  -Key Features Implemented
+- ✅ Professional IT visual identity with Deep Slate theme
+- ✅ Instagram-style photography modal with EXIF metadata
+- ✅ React 19 with modern hooks (use(), useMemo, useEffect)
+- ✅ Optimized image loading with Next/Image
+- ✅ Responsive split-screen gallery layout
+- ✅ Professional project descriptions with tech stacks
+- ✅ Social media integration with SVG icons
+- ✅ Framer Motion animations and transitions
+
+## Future Enhancements
+- [ ] Add software project screenshots
+- [ ] Upload PC build photos
+- [ ] Add digital art images (8 pieces)
+- [ ] Implement project filtering/search
+- [ ] Add blog section (optional)
+- [ ] SEO optimization and meta tags
+- [ ] Performance monitoring and analyticsignment with navbar
 - **Components:** Minimal borders, rounded corners, subtle hover states
 
 ## Content
