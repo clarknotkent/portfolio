@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import { withBasePath } from "@/lib/utils";
 
 interface SlideImage {
   src: string;
@@ -148,10 +149,10 @@ export default function OffKeyboardPage() {
               
               <GallerySlideshow 
                 images={[
-                  { src: "/images/flag-football/595080906_1381678140636080_1318923575577891537_n.jpg", alt: "Davao Legionnaires Match Day" },
-                  { src: "/images/flag-football/595307726_25312621365065410_1546899642655596101_n.jpg", alt: "Competing in Manila Tournament" },
-                  { src: "/images/flag-football/597599121_1381677657302795_1083627458644293300_n.jpg", alt: "Team Huddle in CDO" },
-                  { src: "/images/flag-football/597972817_1381680703969157_6090325612564495738_n.jpg", alt: "Flag Football Action Shot" }
+                  { src: withBasePath("/images/flag-football/595080906_1381678140636080_1318923575577891537_n.jpg"), alt: "Davao Legionnaires Match Day" },
+                  { src: withBasePath("/images/flag-football/595307726_25312621365065410_1546899642655596101_n.jpg"), alt: "Competing in Manila Tournament" },
+                  { src: withBasePath("/images/flag-football/597599121_1381677657302795_1083627458644293300_n.jpg"), alt: "Team Huddle in CDO" },
+                  { src: withBasePath("/images/flag-football/597972817_1381680703969157_6090325612564495738_n.jpg"), alt: "Flag Football Action Shot" }
                 ]}
               />
             </div>
@@ -181,10 +182,10 @@ export default function OffKeyboardPage() {
               
               <GallerySlideshow 
                 images={[
-                  { src: "/images/event-photography/ux-davao-workshop-candid.jpg", alt: "UX Davao Workshop Candid" },
-                  { src: "/images/event-photography/devcon-networking-session.jpg", alt: "Devcon Networking Session" },
-                  { src: "/images/event-photography/uxph-conference-2025.jpg", alt: "UXPH Conference 2025" },
-                  { src: "/images/event-photography/tech-meetup-discussion.jpg", alt: "Tech Meetup Discussion" }
+                  { src: withBasePath("/images/event-photography/ux-davao-workshop-candid.jpg"), alt: "UX Davao Workshop Candid" },
+                  { src: withBasePath("/images/event-photography/devcon-networking-session.jpg"), alt: "Devcon Networking Session" },
+                  { src: withBasePath("/images/event-photography/uxph-conference-2025.jpg"), alt: "UXPH Conference 2025" },
+                  { src: withBasePath("/images/event-photography/tech-meetup-discussion.jpg"), alt: "Tech Meetup Discussion" }
                 ]}
               />
             </div>
@@ -214,9 +215,9 @@ export default function OffKeyboardPage() {
               
               <GallerySlideshow 
                 images={[
-                  { src: "/images/community-building/access-general-assembly.jpg", alt: "ACCESS General Assembly" },
-                  { src: "/images/community-building/student-mentorship-session.jpg", alt: "Student Mentorship Session" },
-                  { src: "/images/community-building/collaborative-project-brainstorm.jpg", alt: "Collaborative Project Brainstorm" }
+                  { src: withBasePath("/images/community-building/access-general-assembly.jpg"), alt: "ACCESS General Assembly" },
+                  { src: withBasePath("/images/community-building/student-mentorship-session.jpg"), alt: "Student Mentorship Session" },
+                  { src: withBasePath("/images/community-building/collaborative-project-brainstorm.jpg"), alt: "Collaborative Project Brainstorm" }
                 ]}
               />
             </div>

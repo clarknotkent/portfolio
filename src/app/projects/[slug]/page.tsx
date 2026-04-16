@@ -7,6 +7,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect, use, useMemo } from "react";
 import exifr from "exifr";
+import { withBasePath } from "@/lib/utils";
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -40,12 +41,12 @@ export default function ProjectPage({ params }: Props) {
   const images = useMemo(() => {
     if (project.slug === "photography-portfolio") {
       return Array.from({ length: project.imageCount || 11 }, (_, i) => ({
-        src: `/images/photography/${i + 1}.JPG`,
+        src: withBasePath(`/images/photography/${i + 1}.JPG`),
         alt: `Photography ${i + 1}`,
       }));
     } else if (project.slug === "digital-art-showcase") {
       return Array.from({ length: project.imageCount || 8 }, (_, i) => ({
-        src: `/images/digital-art/${i + 1}.jpg`,
+        src: withBasePath(`/images/digital-art/${i + 1}.jpg`),
         alt: `Digital Art ${i + 1}`,
       }));
     }
@@ -57,14 +58,18 @@ export default function ProjectPage({ params }: Props) {
       return [];
     }
 
-    return (project.screenshots || []).filter((src) => !failedScreenshots.includes(src));
+    return (project.screenshots || [])
+      .map((src) => withBasePath(src))
+      .filter((src) => !failedScreenshots.includes(src));
   }, [project.category, project.screenshots, failedScreenshots]);
   const pcBuildPhotos = useMemo(() => {
     if (project.category !== "PC Building") {
       return [];
     }
 
-    return (project.screenshots || []).filter((src) => !failedScreenshots.includes(src));
+    return (project.screenshots || [])
+      .map((src) => withBasePath(src))
+      .filter((src) => !failedScreenshots.includes(src));
   }, [project.category, project.screenshots, failedScreenshots]);
   const desktopScreenshot = softwareScreenshots[0];
   const mobileScreenshots = softwareScreenshots.slice(1, 3);

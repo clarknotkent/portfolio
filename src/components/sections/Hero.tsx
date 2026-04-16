@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { withBasePath } from "@/lib/utils";
 
 export function Hero() {
+  const router = useRouter();
+
   return (
     <div className="relative flex items-center justify-center p-8 bg-[#0F172A] py-20 lg:py-32">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -36,10 +40,10 @@ export function Hero() {
 
           {/* Action Area */}
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
-            <Button variant="primary" size="lg" onClick={() => window.location.href='/projects'}>
+            <Button variant="primary" size="lg" onClick={() => router.push("/projects")}>
               View Projects
             </Button>
-            <Button variant="outline" size="lg" onClick={() => window.location.href='/about'}>
+            <Button variant="outline" size="lg" onClick={() => router.push("/about")}>
               About Me
             </Button>
           </div>
@@ -109,7 +113,7 @@ export function Hero() {
           {/* Profile Photo Container */}
           <div className="relative w-full aspect-square max-w-[500px] bg-[#1E293B] rounded-[2rem] border border-[#334155] overflow-hidden">
             <Image
-              src="/images/profile/561751792_24830002459993972_4220551045555156543_n.jpg"
+              src={withBasePath("/images/profile/561751792_24830002459993972_4220551045555156543_n.jpg")}
               alt="Kent Elrond Andionne Aspa"
               fill
               className="object-cover"

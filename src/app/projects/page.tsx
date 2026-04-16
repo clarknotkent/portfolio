@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { withBasePath } from "@/lib/utils";
 
 type Category = "Software Engineering" | "PC Building" | "Creative Works" | "SIP Passion Plan";
 
@@ -223,7 +224,7 @@ export default function ProjectsPage() {
                                 className="relative aspect-square bg-[#0F172A] border border-[#334155] rounded overflow-hidden"
                               >
                                 <Image
-                                  src={`/images/photography/${i + 1}.JPG`}
+                                  src={withBasePath(`/images/photography/${i + 1}.JPG`)}
                                   alt={`Photography ${i + 1}`}
                                   fill
                                   className="object-cover"
@@ -303,14 +304,14 @@ export default function ProjectsPage() {
                   >
                     <figure className="space-y-3 w-full max-w-[420px]">
                       <Link
-                        href="/images/photography/1.JPG"
+                        href={withBasePath("/images/photography/1.JPG")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group block"
                       >
                         <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
                           <Image
-                            src="/images/photography/1.JPG"
+                            src={withBasePath("/images/photography/1.JPG")}
                             alt="SIP reflection visual 1"
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -319,7 +320,7 @@ export default function ProjectsPage() {
                         </div>
                       </Link>
                       <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 1. <Link href="/images/photography/1.JPG" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
+                        Reflection Image 1. <Link href={withBasePath("/images/photography/1.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
                       </figcaption>
                     </figure>
 
@@ -358,14 +359,14 @@ export default function ProjectsPage() {
 
                     <figure className="space-y-3 w-full max-w-[420px] lg:ml-auto">
                       <Link
-                        href="/images/photography/2.JPG"
+                        href={withBasePath("/images/photography/2.JPG")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group block"
                       >
                         <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
                           <Image
-                            src="/images/photography/2.JPG"
+                            src={withBasePath("/images/photography/2.JPG")}
                             alt="SIP reflection visual 2"
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -374,7 +375,7 @@ export default function ProjectsPage() {
                         </div>
                       </Link>
                       <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 2. <Link href="/images/photography/2.JPG" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
+                        Reflection Image 2. <Link href={withBasePath("/images/photography/2.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
                       </figcaption>
                     </figure>
                   </motion.section>
@@ -389,14 +390,14 @@ export default function ProjectsPage() {
                   >
                     <figure className="space-y-3 w-full max-w-[420px]">
                       <Link
-                        href="/images/photography/3.JPG"
+                        href={withBasePath("/images/photography/3.JPG")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group block"
                       >
                         <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
                           <Image
-                            src="/images/photography/3.JPG"
+                            src={withBasePath("/images/photography/3.JPG")}
                             alt="SIP reflection visual 3"
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -405,7 +406,7 @@ export default function ProjectsPage() {
                         </div>
                       </Link>
                       <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 3. <Link href="/images/photography/3.JPG" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
+                        Reflection Image 3. <Link href={withBasePath("/images/photography/3.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
                       </figcaption>
                     </figure>
 
