@@ -4,6 +4,7 @@ import { projects } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useState, useEffect, use, useMemo } from "react";
 import exifr from "exifr";
 
@@ -27,6 +28,7 @@ export default function ProjectPage({ params }: Props) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [metadata, setMetadata] = useState<ImageMetadata | null>(null);
   const [loadingMetadata, setLoadingMetadata] = useState(false);
+  const [failedScreenshots, setFailedScreenshots] = useState<string[]>([]);
 
   const project = projects.find((p) => p.slug === resolvedParams.slug);
 
@@ -49,6 +51,27 @@ export default function ProjectPage({ params }: Props) {
     }
     return [];
   }, [project.slug, project.imageCount]);
+
+  const softwareScreenshots = useMemo(() => {
+    if (project.category !== "Software Engineering") {
+      return [];
+    }
+
+    return (project.screenshots || []).filter((src) => !failedScreenshots.includes(src));
+  }, [project.category, project.screenshots, failedScreenshots]);
+  const pcBuildPhotos = useMemo(() => {
+    if (project.category !== "PC Building") {
+      return [];
+    }
+
+    return (project.screenshots || []).filter((src) => !failedScreenshots.includes(src));
+  }, [project.category, project.screenshots, failedScreenshots]);
+  const desktopScreenshot = softwareScreenshots[0];
+  const mobileScreenshots = softwareScreenshots.slice(1, 3);
+
+  useEffect(() => {
+    setFailedScreenshots([]);
+  }, [project.slug]);
 
   // Load EXIF metadata when image is selected
   useEffect(() => {
@@ -122,7 +145,12 @@ export default function ProjectPage({ params }: Props) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
       <div className="space-y-8">
         {/* Back Button */}
         <Link href="/projects" className="inline-block px-4 py-2 text-[#6366F1] hover:text-[#4F46E5] transition-colors">
@@ -185,14 +213,54 @@ export default function ProjectPage({ params }: Props) {
             {/* Screenshots */}
             <div className="space-y-6">
               <h2 className="text-2xl font-semibold text-white">Screenshots</h2>
-              <div className="grid grid-cols-1 gap-6">
-                <div className="aspect-video bg-[#1E293B] border border-[#334155] rounded-lg flex items-center justify-center">
-                  <span className="text-[#94A3B8]">Screenshot Placeholder</span>
+              {softwareScreenshots.length > 0 ? (
+                <div className="space-y-4">
+                  <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-[#0F172A]">
+                    <Image
+                      src={desktopScreenshot}
+                      alt={`${project.title} desktop screenshot`}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 1024px) 100vw, 896px"
+                      onError={() => {
+                        setFailedScreenshots((prev) =>
+                          prev.includes(desktopScreenshot) ? prev : [...prev, desktopScreenshot]
+                        );
+                      }}
+                    />
+                  </div>
+
+                  {mobileScreenshots.length > 0 && (
+                    <div className={mobileScreenshots.length === 1 ? "max-w-sm mx-auto" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
+                      {mobileScreenshots.map((screenshot, index) => (
+                        <div
+                          key={screenshot}
+                          className="relative aspect-[9/16] rounded-lg overflow-hidden bg-[#0F172A]"
+                        >
+                          <Image
+                            src={screenshot}
+                            alt={`${project.title} mobile screenshot ${index + 1}`}
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 640px) 100vw, 448px"
+                            onError={() => {
+                              setFailedScreenshots((prev) =>
+                                prev.includes(screenshot) ? prev : [...prev, screenshot]
+                              );
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div className="aspect-video bg-[#1E293B] border border-[#334155] rounded-lg flex items-center justify-center">
-                  <span className="text-[#94A3B8]">Screenshot Placeholder</span>
+              ) : (
+                <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-6 text-sm text-[#94A3B8]">
+                  No screenshots available yet for this project. Add images inside
+                  {" "}<span className="text-white">public/images/software-engineering</span>{" "}
+                  and update the screenshot paths in project data.
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Tags */}
@@ -255,16 +323,35 @@ export default function ProjectPage({ params }: Props) {
             {/* Build Photos */}
             <div className="space-y-6">
               <h2 className="text-2xl font-semibold text-white">Build Photos</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="aspect-square bg-[#1E293B] border border-[#334155] rounded-lg flex items-center justify-center"
-                  >
-                    <span className="text-[#94A3B8]">Photo {i + 1}</span>
-                  </div>
-                ))}
-              </div>
+              {pcBuildPhotos.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {pcBuildPhotos.map((photo, i) => (
+                    <div
+                      key={photo}
+                      className="relative aspect-square bg-[#1E293B] border border-[#334155] rounded-lg overflow-hidden"
+                    >
+                      <Image
+                        src={photo}
+                        alt={`${project.title} build photo ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={() => {
+                          setFailedScreenshots((prev) =>
+                            prev.includes(photo) ? prev : [...prev, photo]
+                          );
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-6 text-sm text-[#94A3B8]">
+                  No build photos found. Add images inside
+                  {" "}<span className="text-white">public/images/pc</span>{" "}
+                  and link them in project data.
+                </div>
+              )}
             </div>
           </>
         )}
@@ -506,6 +593,6 @@ export default function ProjectPage({ params }: Props) {
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

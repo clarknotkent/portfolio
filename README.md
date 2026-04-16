@@ -54,6 +54,20 @@ Build for production:
 npm run build
 ```
 
+## Deploy to GitHub Pages
+
+This project is configured for static export and automatic deployment with GitHub Actions.
+
+1. Open your repository settings on GitHub.
+2. Go to **Pages** and set **Source** to **GitHub Actions**.
+3. Push to the `main` or `master` branch to trigger deployment.
+
+Optional local static preview:
+```bash
+npm run build
+npx serve out
+```
+
 ## Project Structure
 ```
 src/

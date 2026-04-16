@@ -24,9 +24,9 @@ export const projects: Project[] = [
     role: "Team Lead",
     category: "Software Engineering",
     screenshots: [
-      "/images/projects/nip-ims/screenshot-1.jpg",
-      "/images/projects/nip-ims/screenshot-2.jpg",
-      "/images/projects/nip-ims/screenshot-3.jpg"
+      "/images/software-engineering/Vue/1.png",
+      "/images/software-engineering/Vue/2.png",
+      "/images/software-engineering/Vue/3.png"
     ],
     tags: ["Full-Stack Development", "PWA", "Healthcare", "QR Scanning", "SMS Integration"],
     repoUrl: "https://github.com/clarknotkent/immunization-management-system",
@@ -40,9 +40,7 @@ export const projects: Project[] = [
     role: "Front End Developer",
     category: "Software Engineering",
     screenshots: [
-      "/images/projects/health-key/screenshot-1.jpg",
-      "/images/projects/health-key/screenshot-2.jpg",
-      "/images/projects/health-key/screenshot-3.jpg"
+      "/images/software-engineering/React/1.png"
     ],
     tags: ["Full-Stack Development", "E-Commerce",],
     repoUrl: "https://github.com/clarknotkent/health-key-pharma-scm",
@@ -56,9 +54,8 @@ export const projects: Project[] = [
     role: "Mobile Developer",
     category: "Software Engineering",
     screenshots: [
-      "/images/projects/univents/screenshot-1.jpg",
-      "/images/projects/univents/screenshot-2.jpg",
-      "/images/projects/univents/screenshot-3.jpg"
+      "/images/software-engineering/Flutter/1.png",
+      "/images/software-engineering/Flutter/2.png"
     ],
     tags: ["Cross-Platform Development", "Mobile App",],
     repoUrl: "https://github.com/clarknotkent/univents",
@@ -67,12 +64,11 @@ export const projects: Project[] = [
   // PC Building
   {
     slug: "custom-sff-workstation-formd-t1",
-    title: "SFF Workstation | FormD T1",
-    description: "A high-performance, small form factor rig built for my specific needs.",
+    title: "SFF Workstation | FormD T1",    description: "A high-performance, small form factor rig built for my specific needs. Not the best but it gets the job done.",
         components: [
             "FormD T1 (Sandwich Layout)",
             "AMD Ryzen 7 7800X3D",
-            "NVIDIA RTX 3070",
+            "Asus Prime Nvidia RTX 5070",
             "Gigabyte Aorus B850I",
             "32GB DDR5-6400 CL36",
             "Corsair MP600 Core Mini",
@@ -81,6 +77,12 @@ export const projects: Project[] = [
         ],
     role: "System Builder",
     category: "PC Building",
+    screenshots: [
+      "/images/pc/PC.jpg",
+      "/images/pc/PC-2.jpg",
+      "/images/pc/PC-3.jpg",
+      "/images/pc/PC-4.jpg"
+    ],
   },
   
   // Creative Works
