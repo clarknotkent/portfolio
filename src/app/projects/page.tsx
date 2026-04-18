@@ -7,12 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { withBasePath } from "@/lib/utils";
 
-type Category = "Software Engineering" | "PC Building" | "Creative Works" | "SIP Passion Plan";
+type Category = "Software Engineering" | "PC Building" | "Creative Works";
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("Software Engineering");
 
-  const categories: Category[] = ["Software Engineering", "PC Building", "Creative Works", "SIP Passion Plan"];
+  const categories: Category[] = ["Software Engineering", "PC Building", "Creative Works"];
   const filteredProjects = projects.filter((p) => p.category === activeCategory);
 
   return (
@@ -254,183 +254,6 @@ export default function ProjectsPage() {
               </div>
             )}
 
-            {/* SIP Passion Plan */}
-            {activeCategory === "SIP Passion Plan" && (
-              <div className="max-w-5xl space-y-12">
-                <motion.header
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45 }}
-                  className="pb-8 border-b border-[#334155] space-y-5"
-                >
-                  <p className="text-sm uppercase tracking-[0.18em] text-[#00D9FF] font-semibold">
-                    Final Summative Assessment
-                  </p>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white">SIP Passion Plan</h2>
-                  <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left max-w-4xl">
-                    This section serves as my major output for the Seniors Integration Program journey.
-                    For now, the full writeup is in placeholder format and will be replaced with the final submission.
-                  </p>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    <Link
-                      href="#sip-mission"
-                      className="text-sm px-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded text-[#94A3B8] hover:text-white hover:border-[#00D9FF] transition-colors"
-                    >
-                      Personal Mission Statement
-                    </Link>
-                    <Link
-                      href="#sip-prayer"
-                      className="text-sm px-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded text-[#94A3B8] hover:text-white hover:border-[#00D9FF] transition-colors"
-                    >
-                      Prayer for Future Self
-                    </Link>
-                    <Link
-                      href="#sip-plan"
-                      className="text-sm px-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded text-[#94A3B8] hover:text-white hover:border-[#00D9FF] transition-colors"
-                    >
-                      10-20 Year Passion Plan
-                    </Link>
-                  </div>
-                </motion.header>
-
-                <article className="space-y-16">
-                  <motion.section
-                    id="sip-mission"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.45 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start scroll-mt-24"
-                  >
-                    <figure className="space-y-3 w-full max-w-[420px]">
-                      <Link
-                        href={withBasePath("/images/photography/1.JPG")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block"
-                      >
-                        <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
-                          <Image
-                            src={withBasePath("/images/photography/1.JPG")}
-                            alt="SIP reflection visual 1"
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 1024px) 100vw, 420px"
-                          />
-                        </div>
-                      </Link>
-                      <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 1. <Link href={withBasePath("/images/photography/1.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
-                      </figcaption>
-                    </figure>
-
-                    <div className="space-y-5">
-                      <h3 className="text-2xl md:text-3xl font-semibold text-white">1. Personal Mission Statement</h3>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in eros ac justo convallis feugiat.
-                        Aliquam erat volutpat. Integer tristique sem ut arcu feugiat, vitae consequat risus interdum.
-                      </p>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Donec aliquet, ipsum sed malesuada condimentum, lectus nunc tincidunt libero, vitae faucibus nibh
-                        nunc in leo. Morbi id cursus nisl, in blandit quam.
-                      </p>
-                    </div>
-                  </motion.section>
-
-                  <motion.section
-                    id="sip-prayer"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.45 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start scroll-mt-24"
-                  >
-                    <div className="space-y-5">
-                      <h3 className="text-2xl md:text-3xl font-semibold text-white">2. Prayer for Your Future Self</h3>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac habitasse platea dictumst. Praesent
-                        feugiat, purus ac posuere pretium, sem nibh pellentesque est, ac posuere lacus turpis vel lorem.
-                      </p>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Suspendisse varius nibh at sapien volutpat, vel ullamcorper eros porttitor. Cras tempus, turpis in
-                        ultricies faucibus, velit elit volutpat lacus, et suscipit leo lectus vitae arcu.
-                      </p>
-                    </div>
-
-                    <figure className="space-y-3 w-full max-w-[420px] lg:ml-auto">
-                      <Link
-                        href={withBasePath("/images/photography/2.JPG")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block"
-                      >
-                        <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
-                          <Image
-                            src={withBasePath("/images/photography/2.JPG")}
-                            alt="SIP reflection visual 2"
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 1024px) 100vw, 420px"
-                          />
-                        </div>
-                      </Link>
-                      <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 2. <Link href={withBasePath("/images/photography/2.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
-                      </figcaption>
-                    </figure>
-                  </motion.section>
-
-                  <motion.section
-                    id="sip-plan"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.45 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start scroll-mt-24"
-                  >
-                    <figure className="space-y-3 w-full max-w-[420px]">
-                      <Link
-                        href={withBasePath("/images/photography/3.JPG")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block"
-                      >
-                        <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-[#334155] bg-[#1E293B]">
-                          <Image
-                            src={withBasePath("/images/photography/3.JPG")}
-                            alt="SIP reflection visual 3"
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 1024px) 100vw, 420px"
-                          />
-                        </div>
-                      </Link>
-                      <figcaption className="text-sm text-[#94A3B8]">
-                        Reflection Image 3. <Link href={withBasePath("/images/photography/3.JPG")} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] hover:text-[#6FC3DF] transition-colors">Open full image</Link>
-                      </figcaption>
-                    </figure>
-
-                    <div className="space-y-5">
-                      <h3 className="text-2xl md:text-3xl font-semibold text-white">3. 10–20 Year Passion Plan</h3>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin justo id feugiat ultrices.
-                        Integer eu facilisis augue. Aenean ac eros nec urna imperdiet luctus at non ex.
-                      </p>
-                      <p className="text-base md:text-lg text-[#94A3B8] leading-8 text-left">
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed ac massa
-                        elit. Nullam volutpat magna vitae neque tincidunt, nec fermentum elit suscipit.
-                      </p>
-                      <Link
-                        href="#projects-top"
-                        className="inline-flex items-center gap-1 text-base text-[#00D9FF] hover:text-[#6FC3DF] transition-colors pt-1"
-                      >
-                        Back to top <span aria-hidden="true">↑</span>
-                      </Link>
-                    </div>
-                  </motion.section>
-                </article>
-              </div>
-            )}
           </motion.div>
         </AnimatePresence>
       </div>

@@ -1,153 +1,120 @@
 # Clarknotkent Portfolio
 
-Professional portfolio showcasing software engineering projects, PC builds, and creative works. Built with Next.js 16.1.3 and modern web technologies.
+Personal portfolio showcasing software engineering projects, PC builds, creative works, and the Seniors Integration Program (SIP) reflection output. Built with Next.js 16 and deployed as a static site on GitHub Pages.
 
-## Project Status
-**Phase:** High Fidelity Design ✅
-- ✅ Professional Deep Slate theme with Electric Indigo accents
-- ✅ Complete project showcase with professional descriptions
-- ✅ Instagram-style photography gallery with EXIF metadata
-- ✅ Interactive modal viewer with navigation
-- ✅ Responsive design with optimized image loading
-- ✅ Social media integration
+## Pages
+
+- **Home** (`/`) — Hero section and introduction
+- **Projects** (`/projects`) — Tabbed showcase: Software Engineering, PC Building, Creative Works
+  - Individual detail pages at `/projects/[slug]`
+- **SIP** (`/sip`) — Seniors Integration Program output, organized into three tabs:
+  - *AdDU Journey Map* — 2022–2026 timeline with per-year reflections and images
+  - *Conversion Story* — long-form narrative in 6 sections with alternating image/text layout
+  - *SIP Passion Plan* — Personal Mission Statement, Prayer for My Future Self, and a phased 10–20 year plan
+- **About** (`/about`) — Education, organizations, volunteering, tech stack, certifications
+- **Off-Keyboard** (`/off-keyboard`) — Flag Football, Event Photography, Community Building galleries
+- **Contact** (`/contact`) — Email and social links
 
 ## Tech Stack
-- **Framework:** Next.js 16.1.3 (App Router, Turbopack)
-- **Styling:** Tailwind CSS v4 with custom design system
-- **Animations:** Framer Motion 12.26.2
-- **Language:** TypeScript
-- **Metadata:** exifr for EXIF data extraction
-- **Typography:** Inter font family (Google Fonts)
-- **Image Optimization:** Next.js Image component with WebP support
-with detail pages
-  - Software Engineering: NIP Immunization System, Health Key Pharma, UniVents
-  - PC Building: Custom builds with full specifications
-  - Creative Works: Photography portfolio with 11 images, Digital Art showcase
-- **Photography Gallery:** Instagram-style modal viewer
-  - Full EXIF metadata display (Camera, Lens, Settings, Date)
-  - Next/Previous navigation
-  - Responsive split-screen layout
-  - Optimized image loading
-- **About Page:** Education (Ateneo de Davao), ACCESS leadership, volunteering, certifications
-- **Off-Keyboard:** Flag Football, Event Photography, Community Building with galleries
-- **Contact:** Email, GitHub, LinkedIn, Instagram with SVG icons
-- **Design System:** Deep Slate (#0F172A) background, Electric Indigo (#6366F1) accents, 8px grid systemtball, Event Photography, Community Building)
-- **Contact:** Social links with optimized layout
-- **Responsive Design:** Mobile-first approach with consistent spacing
+
+- **Framework:** Next.js 16.1.3 (App Router, Turbopack, static export)
+- **UI:** React 19.2.3, Tailwind CSS v4
+- **Animations:** Framer Motion 12
+- **Icons:** react-icons, lucide-react
+- **Utilities:** clsx, tailwind-merge, exifr (photo EXIF metadata)
+- **Language:** TypeScript 5
+- **Typography:** Inter (Google Fonts)
 
 ## Getting Started
 
-Install dependencies:
 ```bash
 npm install
-```
-
-Run the development server:
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-Build for production:
+Production build:
+
 ```bash
 npm run build
 ```
 
-## Deploy to GitHub Pages
+Static preview:
 
-This project is configured for static export and automatic deployment with GitHub Actions.
-
-1. Open your repository settings on GitHub.
-2. Go to **Pages** and set **Source** to **GitHub Actions**.
-3. Push to the `main` or `master` branch to trigger deployment.
-
-Optional local static preview:
 ```bash
-npm run build
 npx serve out
 ```
 
+## Deployment
+
+Deployed to GitHub Pages via GitHub Actions (`.github/workflows`). Pushes to `master` trigger a static export build and publish. A `withBasePath` helper in [src/lib/utils.ts](src/lib/utils.ts) handles asset paths under the repo subpath.
+
+To enable: Repository Settings → Pages → Source: **GitHub Actions**.
+
 ## Project Structure
+
 ```
 src/
 ├── app/
-│   ├── page.tsx                 # Home page with hero section
+│   ├── page.tsx                 # Home
+│   ├── layout.tsx               # Root layout + metadata
+│   ├── globals.css              # Tailwind base + tokens
 │   ├── projects/
-│   │   ├── page.tsx            # Project showcase with tabs
-│   │   └── [slug]/page.tsx     # Individual project details
-│   ├── about/page.tsx           # About me page
-│   ├── off-keyboard/page.tsx    # Personal interests with galleries
-│   └── contact/page.tsx         # Contact and social links
+│   │   ├── page.tsx             # Tabbed showcase
+│   │   └── [slug]/
+│   │       ├── layout.tsx       # Project detail wrapper
+│   │       └── page.tsx         # Individual project detail
+│   ├── sip/page.tsx             # SIP page with Journey Map / Conversion Story / Passion Plan tabs
+│   ├── about/page.tsx
+│   ├── off-keyboard/page.tsx
+│   └── contact/page.tsx
 ├── components/
 │   ├── common/
-│   │   ├── Navbar.tsx          # Navigation component
-│   │   └── Footer.tsx          # Footer with copyright
-│   ├── sectphotography/         # 11 professional photos with EXIF data
-        ├── digital-art/         # Digital art showcase (8 images)
-        ├── ions/
-│   │   └── Hero.tsx            # Hero section component
-│   └── ui/
-│       └── Button.tsx          # Reusable button component
-├── lib/
-  - Background: Deep Slate (#0F172A)
-  - Primary: Electric Indigo (#6366F1)
-  - Primary Hover: (#4F46E5)
-  - Cards: Slate Gray (#1E293B)
-  - Border: (#334155)
-  - Text Primary: White (#FFFFFF)
-  - Text Secondary: (#94A3B8)
-- **Typography:** Inter font family, bold headings with -0.02em letter spacing
-- **Spacing:** 8px grid system (all padding/margins in multiples of 8px)
-- **Layout:** max-w-4xl/max-w-6xl with consistent container widths
-- **Components:** Slate Gray cards, Electric Indigo buttons, subtle hover transition
-        ├── event-photography/   # Event photography images
-        └── community-building/  # Community building images
+│   │   ├── Navbar.tsx
+│   │   └── Footer.tsx
+│   ├── sections/Hero.tsx
+│   └── ui/Button.tsx
+└── lib/
+    ├── projects.ts              # Project data model
+    └── utils.ts                 # withBasePath, cn helpers
+
+public/images/
+├── conversion/                  # Reserved for Conversion Story images
+├── journey-map/                 # AdDU Journey Map year images (image.jpg … image5.jpg)
+├── photography/                 # 11 photos with EXIF metadata
+├── digital-art/                 # Digital art gallery
+├── pc/                          # PC build photos
+├── profile/                     # Profile photos
+├── event-photography/
+├── community-building/
+├── flag-football/
+└── software-engineering/        # Project screenshots grouped by stack
 ```
 
-  - NIP Immunization System (Capstone/Thesis, Service Learning)
-  - Health Key Pharma (Systems Analysis & Design)
-  - UniVents (Multi-Platform App Development)
-  - PC Build: Aelio (Intel i7-12700F, RTX 4070 Ti SUPER)
-  - Photography Portfolio (11 images with EXIF metadata)
-  -Key Features Implemented
-- ✅ Professional IT visual identity with Deep Slate theme
-- ✅ Instagram-style photography modal with EXIF metadata
-- ✅ React 19 with modern hooks (use(), useMemo, useEffect)
-- ✅ Optimized image loading with Next/Image
-- ✅ Responsive split-screen gallery layout
-- ✅ Professional project descriptions with tech stacks
-- ✅ Social media integration with SVG icons
-- ✅ Framer Motion animations and transitions
+## Design System
 
-## Future Enhancements
-- [ ] Add software project screenshots
-- [ ] Upload PC build photos
-- [ ] Add digital art images (8 pieces)
-- [ ] Implement project filtering/search
-- [ ] Add blog section (optional)
-- [ ] SEO optimization and meta tags
-- [ ] Performance monitoring and analyticsignment with navbar
-- **Components:** Minimal borders, rounded corners, subtle hover states
+- **Background:** Deep Slate `#0F172A`
+- **Surfaces:** Slate Gray `#1E293B` (cards), border `#334155`
+- **Accent:** Electric Cyan `#00D9FF` (hover `#6FC3DF`)
+- **Secondary accent:** Indigo `#6366F1` (Software Engineering card hover)
+- **Text:** White `#FFFFFF` primary, `#94A3B8` muted
+- **Typography:** Inter, bold headings
+- **Layout:** Centered `max-w-6xl` containers with 8px spacing grid
+- **Motion:** Framer Motion `initial`/`whileInView` fades with light stagger; `AnimatePresence` crossfade on tab changes
 
-## Content
-- **Projects:** 6 projects across 3 categories
-- **Organizations:** ACCESS (leadership roles), Davao Legionnaires, DICE
-- **Volunteering:** Photographer for UXPH, UX Davao, Devcon Davao
+## Content Summary
+
+- **Projects (6):** NIP Immunization System (capstone), Health Key Pharma SCM, UniVents (Flutter), FormD T1 SFF build, Photography Portfolio, Digital Art Showcase
+- **SIP:** Full AdDU journey timeline (2022–2026), conversion narrative, and 10–20 year passion plan
+- **Organizations:** ACCESS (leadership), Davao Legionnaires, DICE
+- **Volunteering:** UXPH, UX Davao, Devcon Davao
 - **Certifications:** IBM Project Management, Cisco CCNA
-- **Tech Stack:** Vue/React/Next/Flutter, Supabase/Firebase, TypeScript/JavaScript
-
-## Next Steps (High Fidelity Phase)
-- [ ] Add actual profile photo to hero section
-- [ ] Implement color scheme and visual identity
-- [ ] Add more project screenshots
-- [ ] Enhance typography and spacing refinements
-- [ ] Add animations and micro-interactions
-- [ ] Optimize performance and SEO
-- [ ] Add dark mode support (optional)
 
 ## Author
+
 Kent Elrond Andionne Aspa
+
 - Email: kentaspa54@gmail.com
 - LinkedIn: [linkedin.com/in/clarknotkent](https://www.linkedin.com/in/clarknotkent/)
 - GitHub: [github.com/clarknotkent](https://github.com/clarknotkent)
