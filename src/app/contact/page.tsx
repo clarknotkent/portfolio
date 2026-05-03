@@ -17,16 +17,16 @@ export default function ContactPage() {
       description: "Connect with me professionally",
     },
     {
-      platform: "Instagram",
-      handle: "@clarknotkent_",
-      url: "https://instagram.com/clarknotkent_",
-      description: "Behind the scenes and off-keyboard moments",
-    },
-    {
       platform: "GitHub",
       handle: "github.com/clarknotkent",
       url: "https://github.com/clarknotkent",
       description: "Check out my code and projects",
+    },
+    {
+      platform: "Instagram",
+      handle: "@clarknotkent_",
+      url: "https://instagram.com/clarknotkent_",
+      description: "Behind the scenes and off-keyboard moments",
     },
     {
       platform: "Steam",

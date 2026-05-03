@@ -62,7 +62,7 @@ export function Hero() {
             </a>
 
             {/* GitHub */}
-            <a 
+            <a
               href="https://github.com/clarknotkent"
               target="_blank"
               rel="noopener noreferrer"

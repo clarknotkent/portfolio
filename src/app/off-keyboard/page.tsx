@@ -180,12 +180,11 @@ export default function OffKeyboardPage() {
                 interactions that happen when the community comes together.
               </p>
               
-              <GallerySlideshow 
+              <GallerySlideshow
                 images={[
-                  { src: withBasePath("/images/event-photography/ux-davao-workshop-candid.jpg"), alt: "UX Davao Workshop Candid" },
-                  { src: withBasePath("/images/event-photography/devcon-networking-session.jpg"), alt: "Devcon Networking Session" },
-                  { src: withBasePath("/images/event-photography/uxph-conference-2025.jpg"), alt: "UXPH Conference 2025" },
-                  { src: withBasePath("/images/event-photography/tech-meetup-discussion.jpg"), alt: "Tech Meetup Discussion" }
+                  { src: withBasePath("/images/event-photography/Devcon.jpg"), alt: "Devcon Davao" },
+                  { src: withBasePath("/images/event-photography/UXD.JPG"), alt: "UX Davao" },
+                  { src: withBasePath("/images/event-photography/UXPH.jpg"), alt: "UXPH Conference" },
                 ]}
               />
             </div>
@@ -213,11 +212,10 @@ export default function OffKeyboardPage() {
                 environment where we can share ideas, tackle challenges as a group, and build a network that extends beyond the classroom.
               </p>
               
-              <GallerySlideshow 
+              <GallerySlideshow
                 images={[
-                  { src: withBasePath("/images/community-building/access-general-assembly.jpg"), alt: "ACCESS General Assembly" },
-                  { src: withBasePath("/images/community-building/student-mentorship-session.jpg"), alt: "Student Mentorship Session" },
-                  { src: withBasePath("/images/community-building/collaborative-project-brainstorm.jpg"), alt: "Collaborative Project Brainstorm" }
+                  { src: withBasePath("/images/community-building/ACCESS.jpg"), alt: "ACCESS" },
+                  { src: withBasePath("/images/community-building/ACCESSxDICE-151.jpg"), alt: "ACCESS x DICE" },
                 ]}
               />
             </div>

@@ -29,7 +29,6 @@ export const projects: Project[] = [
       "/images/software-engineering/Vue/3.png"
     ],
     tags: ["Full-Stack Development", "PWA", "Healthcare", "QR Scanning", "SMS Integration"],
-    repoUrl: "https://github.com/clarknotkent/immunization-management-system",
   },
   {
     slug: "health-key-pharma-scm",
@@ -43,7 +42,6 @@ export const projects: Project[] = [
       "/images/software-engineering/React/1.png"
     ],
     tags: ["Full-Stack Development", "E-Commerce",],
-    repoUrl: "https://github.com/clarknotkent/health-key-pharma-scm",
   },
   {
     slug: "univents",
@@ -58,7 +56,6 @@ export const projects: Project[] = [
       "/images/software-engineering/Flutter/2.png"
     ],
     tags: ["Cross-Platform Development", "Mobile App",],
-    repoUrl: "https://github.com/clarknotkent/univents",
   },
   
   // PC Building
