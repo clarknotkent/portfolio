@@ -204,34 +204,19 @@ export default function ProjectPage({ params }: Props) {
               <h2 className="text-2xl font-semibold text-white">Screenshots</h2>
               {softwareScreenshots.length > 0 ? (
                 <div className="space-y-4">
-                  <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-[#0F172A]">
-                    <Image
-                      src={desktopScreenshot}
-                      alt={`${project.title} desktop screenshot`}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 896px"
-                      onError={() => {
-                        setFailedScreenshots((prev) =>
-                          prev.includes(desktopScreenshot) ? prev : [...prev, desktopScreenshot]
-                        );
-                      }}
-                    />
-                  </div>
-
-                  {mobileScreenshots.length > 0 && (
-                    <div className={mobileScreenshots.length === 1 ? "max-w-sm mx-auto" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
-                      {mobileScreenshots.map((screenshot, index) => (
+                  {project.screenshotLayout === "mobile-row" ? (
+                    <div className="grid grid-cols-3 gap-4">
+                      {softwareScreenshots.map((screenshot, index) => (
                         <div
                           key={screenshot}
                           className="relative aspect-[9/16] rounded-lg overflow-hidden bg-[#0F172A]"
                         >
                           <Image
                             src={screenshot}
-                            alt={`${project.title} mobile screenshot ${index + 1}`}
+                            alt={`${project.title} screenshot ${index + 1}`}
                             fill
                             className="object-contain"
-                            sizes="(max-width: 640px) 100vw, 448px"
+                            sizes="(max-width: 640px) 100vw, 300px"
                             onError={() => {
                               setFailedScreenshots((prev) =>
                                 prev.includes(screenshot) ? prev : [...prev, screenshot]
@@ -241,6 +226,47 @@ export default function ProjectPage({ params }: Props) {
                         </div>
                       ))}
                     </div>
+                  ) : (
+                    <>
+                      <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-[#0F172A]">
+                        <Image
+                          src={desktopScreenshot}
+                          alt={`${project.title} desktop screenshot`}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 1024px) 100vw, 896px"
+                          onError={() => {
+                            setFailedScreenshots((prev) =>
+                              prev.includes(desktopScreenshot) ? prev : [...prev, desktopScreenshot]
+                            );
+                          }}
+                        />
+                      </div>
+
+                      {mobileScreenshots.length > 0 && (
+                        <div className={mobileScreenshots.length === 1 ? "max-w-sm mx-auto" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
+                          {mobileScreenshots.map((screenshot, index) => (
+                            <div
+                              key={screenshot}
+                              className="relative aspect-[9/16] rounded-lg overflow-hidden bg-[#0F172A]"
+                            >
+                              <Image
+                                src={screenshot}
+                                alt={`${project.title} mobile screenshot ${index + 1}`}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 640px) 100vw, 448px"
+                                onError={() => {
+                                  setFailedScreenshots((prev) =>
+                                    prev.includes(screenshot) ? prev : [...prev, screenshot]
+                                  );
+                                }}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               ) : (

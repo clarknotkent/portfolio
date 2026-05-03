@@ -11,6 +11,7 @@ export interface Project {
   screenshots?: string[];
   tags?: string[];
   repoUrl?: string;
+  screenshotLayout?: "default" | "mobile-row";
 }
 
 export const projects: Project[] = [
@@ -52,10 +53,12 @@ export const projects: Project[] = [
     role: "Mobile Developer",
     category: "Software Engineering",
     screenshots: [
-      "/images/software-engineering/Flutter/1.png",
-      "/images/software-engineering/Flutter/2.png"
+      "/images/software-engineering/Flutter/Screenshot 2026-05-04 020823.png",
+      "/images/software-engineering/Flutter/Screenshot 2026-05-04 025343.png",
+      "/images/software-engineering/Flutter/Screenshot 2026-05-04 025417.png",
     ],
     tags: ["Cross-Platform Development", "Mobile App",],
+    screenshotLayout: "mobile-row",
   },
   
   // PC Building
