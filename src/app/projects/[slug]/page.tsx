@@ -226,6 +226,28 @@ export default function ProjectPage({ params }: Props) {
                         </div>
                       ))}
                     </div>
+                  ) : project.screenshotLayout === "desktop-grid" ? (
+                    <div className="grid grid-cols-1 gap-4">
+                      {softwareScreenshots.map((screenshot, index) => (
+                        <div
+                          key={screenshot}
+                          className="relative aspect-[16/9] rounded-lg overflow-hidden bg-[#0F172A]"
+                        >
+                          <Image
+                            src={screenshot}
+                            alt={`${project.title} screenshot ${index + 1}`}
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 1024px) 100vw, 896px"
+                            onError={() => {
+                              setFailedScreenshots((prev) =>
+                                prev.includes(screenshot) ? prev : [...prev, screenshot]
+                              );
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   ) : (
                     <>
                       <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-[#0F172A]">

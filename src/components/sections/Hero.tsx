@@ -33,7 +33,7 @@ export function Hero() {
               </blockquote>
               
               <p className="max-w-xl text-lg text-[#94A3B8] leading-relaxed font-light">
-                I love technology, gaming, and sports. I&apos;m currently an IT student building my foundation in full-stack development. Whether I&apos;m out on the football field, playing video games, or diving into a new project, I&apos;m just focused on the grind and getting better every day.
+                I love technology, gaming, and sports. I&apos;m a recent BSIT graduate building my foundation in full-stack development as a Project Manager and Software Engineer. Whether I&apos;m out on the football field, playing video games, or diving into a new project, I&apos;m just focused on the grind and getting better every day.
               </p>
             </div>
           </div>

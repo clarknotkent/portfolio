@@ -117,10 +117,34 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-white">Who Am I?</h2>
           <div className="prose prose-gray max-w-none">
             <p className="text-lg text-[#94A3B8] leading-relaxed">
-              I&apos;m Kent, a passionate learner aspiring to make an impact as a Software Engineer and Project Manager. 
+              I&apos;m Kent, a recent BSIT graduate focused on making an impact as a Project Manager and Software Engineer. 
               I love tackling complex problems, from building full-stack applications to leading development teams. 
               My competitive spirit keeps me busy—whether I&apos;m playing video games or out on the field playing Flag Football.
             </p>
+          </div>
+        </motion.section>
+
+        {/* Work Experience */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-6"
+        >
+          <h2 className="text-2xl font-semibold text-white">Work Experience</h2>
+          <div className="bg-[#1E293B] border border-[#334155] rounded-lg p-6 space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold text-white">
+                R&amp;D Intern &mdash; Project Lead
+              </h3>
+              <p className="text-[#94A3B8]">
+                ARISEn Lab (Ateneo de Davao Research in Information Systems and Software Engineering Laboratory), Ateneo de Davao University
+              </p>
+              <p className="text-sm text-[#94A3B8]">Jan 2026 – Apr 2026</p>
+              <p className="text-sm text-[#94A3B8] mt-2">
+                Acting as: Project Manager &middot; Product Manager &middot; Full-Stack Developer
+              </p>
+            </div>
           </div>
         </motion.section>
 
@@ -128,7 +152,7 @@ export default function AboutPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold text-white">Education</h2>
@@ -137,7 +161,7 @@ export default function AboutPage() {
               <h3 className="text-lg font-semibold text-white">Ateneo de Davao University</h3>
               <p className="text-[#94A3B8]">Bachelor of Science in Information Technology</p>
               <p className="text-sm text-[#94A3B8]">2022 – 2026</p>
-              <p className="text-sm text-[#94A3B8] mt-1">QPI: 3.xx (Pending calculation)</p>
+              <p className="text-sm text-[#94A3B8] mt-1">QPI: 3.25</p>
             </div>
           </div>
         </motion.section>
@@ -146,7 +170,7 @@ export default function AboutPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold text-white">Organizations</h2>
@@ -159,7 +183,7 @@ export default function AboutPage() {
               <div className="space-y-2 text-sm text-[#94A3B8]">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-[#00D9FF] rounded-full"></div>
-                  <span><span className="font-medium text-white">Executive Vice President</span> | May 2025 – Present</span>
+                  <span><span className="font-medium text-white">Executive Vice President</span> | May 2025 – April 2026</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-[#00D9FF] rounded-full"></div>
@@ -202,7 +226,7 @@ export default function AboutPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold text-white">Volunteering (Photographer)</h2>
@@ -228,7 +252,7 @@ export default function AboutPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold text-white">Tech Stack</h2>
@@ -252,7 +276,7 @@ export default function AboutPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold text-white">Certifications</h2>

@@ -11,7 +11,7 @@ export interface Project {
   screenshots?: string[];
   tags?: string[];
   repoUrl?: string;
-  screenshotLayout?: "default" | "mobile-row";
+  screenshotLayout?: "default" | "mobile-row" | "desktop-grid";
 }
 
 export const projects: Project[] = [
@@ -40,9 +40,26 @@ export const projects: Project[] = [
     role: "Front End Developer",
     category: "Software Engineering",
     screenshots: [
-      "/images/software-engineering/React/1.png"
+      "/images/software-engineering/React/1.png",
+      "/images/software-engineering/React/2.png"
     ],
+    screenshotLayout: "desktop-grid",
     tags: ["Full-Stack Development", "E-Commerce",],
+  },
+  {
+    slug: "tinas-aesthetics-wellness-booking",
+    title: "Tina's Aesthetics and Wellness Services",
+    shortDescription: "Booking site for Tina's Aesthetics and Wellness Services with streamlined appointment scheduling.",
+    description: "A booking site for Tina's Aesthetics and Wellness Services designed to showcase offerings and simplify appointment requests. Built with Next.js for a fast, responsive front end and a Python backend to handle booking workflows.",
+    techStack: ["Next.js", "Python"],
+    category: "Software Engineering",
+    screenshots: [
+      "/images/software-engineering/Next/next1.jpg",
+      "/images/software-engineering/Next/next2.jpg",
+      "/images/software-engineering/Next/next3.jpg"
+    ],
+    screenshotLayout: "desktop-grid",
+    tags: ["Booking System", "Wellness", "Service Business"],
   },
   {
     slug: "univents",
