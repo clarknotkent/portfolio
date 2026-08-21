@@ -25,10 +25,12 @@ export const projects: Project[] = [
     role: "Team Lead",
     category: "Software Engineering",
     screenshots: [
-      "/images/software-engineering/Vue/1.png",
-      "/images/software-engineering/Vue/2.png",
-      "/images/software-engineering/Vue/3.png"
+      "/images/software-engineering/immunization-management-system/1.png",
+      "/images/software-engineering/immunization-management-system/2.png",
+      "/images/software-engineering/immunization-management-system/3.png",
+      "/images/software-engineering/immunization-management-system/4.png"
     ],
+    screenshotLayout: "desktop-grid",
     tags: ["Full-Stack Development", "PWA", "Healthcare", "QR Scanning", "SMS Integration"],
   },
   {
@@ -40,8 +42,8 @@ export const projects: Project[] = [
     role: "Front End Developer",
     category: "Software Engineering",
     screenshots: [
-      "/images/software-engineering/React/1.png",
-      "/images/software-engineering/React/2.png"
+      "/images/software-engineering/health-key-pharma-scm/1.png",
+      "/images/software-engineering/health-key-pharma-scm/2.png"
     ],
     screenshotLayout: "desktop-grid",
     tags: ["Full-Stack Development", "E-Commerce",],
@@ -54,9 +56,9 @@ export const projects: Project[] = [
     techStack: ["Next.js", "Python"],
     category: "Software Engineering",
     screenshots: [
-      "/images/software-engineering/Next/next1.jpg",
-      "/images/software-engineering/Next/next2.jpg",
-      "/images/software-engineering/Next/next3.jpg"
+      "/images/software-engineering/tinas-aesthetics-wellness-booking/1.jpg",
+      "/images/software-engineering/tinas-aesthetics-wellness-booking/2.jpg",
+      "/images/software-engineering/tinas-aesthetics-wellness-booking/3.jpg"
     ],
     screenshotLayout: "desktop-grid",
     tags: ["Booking System", "Wellness", "Service Business"],
@@ -69,13 +71,101 @@ export const projects: Project[] = [
     techStack: ["Flutter", "Dart", "Firebase"],
     role: "Mobile Developer",
     category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/UniVents",
     screenshots: [
-      "/images/software-engineering/Flutter/Screenshot 2026-05-04 020823.png",
-      "/images/software-engineering/Flutter/Screenshot 2026-05-04 025343.png",
-      "/images/software-engineering/Flutter/Screenshot 2026-05-04 025417.png",
+      "/images/software-engineering/univents/1.png",
+      "/images/software-engineering/univents/2.png",
+      "/images/software-engineering/univents/3.png",
     ],
     tags: ["Cross-Platform Development", "Mobile App",],
     screenshotLayout: "mobile-row",
+  },
+  
+  {
+    slug: "bevanda-inventory",
+    title: "Bevanda Inventory | Mobile Bar Stock System",
+    shortDescription: "Inventory, stock movement, and event-preparation tracking for the Bevanda Mobile Bar. Built for IT Elective 2 (Python Web Development) as a Flask JSON API with a React TypeScript front end.",
+    description: "An inventory system for the Bevanda Mobile Bar, built for IT Elective 2 (Python Web Development). Staff catalogue what the bar stocks, move it in and out, and set aside what a booking needs\u2014every movement is logged and the counts stay reconciled in one place. I built it as two fully independent halves: a Flask 3 JSON API with SQLAlchemy models, Alembic migrations, and a pytest suite covering the stock endpoints, paired with a React 18 single-page front end in TypeScript, Tailwind CSS, and Vite talking to it through a typed API client. The core modules are the ingredient catalog, main inventory with par levels and low-stock flagging, stock in/out logging, and a preparation inventory that transfers stock out for a booked event and reconciles what comes back as used, broken, or lost.",
+    techStack: ["Flask", "Python", "SQLAlchemy", "React", "TypeScript", "Tailwind CSS", "Vite"],
+    role: "Full-Stack Developer",
+    category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/IT-Elective-2",
+    screenshots: [
+      "/images/software-engineering/bevanda-inventory/1.png",
+      "/images/software-engineering/bevanda-inventory/2.png",
+      "/images/software-engineering/bevanda-inventory/3.png"
+    ],
+    screenshotLayout: "desktop-grid",
+    tags: ["Full-Stack Development", "Inventory Management", "REST API", "Coursework"],
+  },
+  {
+    slug: "aula-course-platform",
+    title: "Aula | Course Management Platform",
+    shortDescription: "A course management platform where instructors author lessons and assignments, students enrol and submit, and grading happens in one place. Built for Web Systems and Technologies 2.",
+    description: "A course management platform built for Web Systems and Technologies 2 (IT 2345). Instructors author courses as modules of lessons and assignments, students enrol, read, and submit, and work is graded in one place with the feedback attached to every result. The stack is Next.js 14 on the App Router with Prisma 5 over PostgreSQL 16, the whole thing containerised with Docker Compose and migrations applied on boot. Role-aware routing separates admin, instructor, and student views; the instructor dashboard computes its aggregates in the database rather than in JavaScript, and the catalog handles search, level filters, paging, and per-card enrolment state\u2014a course at capacity says so instead of failing on submit. A deterministic seed script generates a repeatable dataset of users, courses, enrolments, and graded work so the app can be demoed from a cold start.",
+    techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker", "NextAuth"],
+    role: "Full-Stack Developer",
+    category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/WebSys2",
+    screenshots: [
+      "/images/software-engineering/aula-course-platform/1.png",
+      "/images/software-engineering/aula-course-platform/2.png",
+      "/images/software-engineering/aula-course-platform/3.png",
+      "/images/software-engineering/aula-course-platform/4.png"
+    ],
+    screenshotLayout: "desktop-grid",
+    tags: ["Full-Stack Development", "Learning Platform", "Role-Based Access", "Docker"],
+  },
+  {
+    slug: "pesopulse",
+    title: "PesoPulse | Personal Finance PWA",
+    shortDescription: "A private finance ledger for closed households, with AI receipt scanning and read-only sharing. Nuxt 3 PWA on the front end, FastAPI on Firebase Cloud Functions behind it.",
+    description: "A Progressive Web App for tracking income and expenses across a small, closed group of users. The front end is a Nuxt 3 SPA generated statically and installable as a PWA; the back end is a Python FastAPI gateway deployed as a Firebase Cloud Function, with Cloud Firestore as the system of record\u2014never touched directly by the browser. The design principle throughout is that the server owns every write: it stamps identifiers and creation timestamps and rejects any client that tries to supply them, so a transaction's history cannot be forged. On top of the ledger sit ephemeral AI receipt scanning that reads a receipt into a draft transaction without retaining the image, and Google-Sheets-style read-only sharing so someone else can view the ledger without the ability to edit it.",
+    techStack: ["Nuxt 3", "Vue", "TypeScript", "FastAPI", "Python", "Firebase", "Firestore"],
+    role: "Full-Stack Developer",
+    category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/PesoPulse",
+    screenshots: [
+      "/images/software-engineering/pesopulse/1.png",
+      "/images/software-engineering/pesopulse/2.png",
+      "/images/software-engineering/pesopulse/3.png"
+    ],
+    screenshotLayout: "mobile-row",
+    tags: ["PWA", "Personal Finance", "AI Integration", "Serverless"],
+  },
+  {
+    slug: "mini-addu-sis",
+    title: "mini-addu-sis | Student Records System",
+    shortDescription: "A staff-facing student records system with composable search filters, sortable columns, CSV export, and bulk delete. Built for Event-Driven Programming with Django.",
+    description: "A student records system for staff, built for IT 2241 Event-Driven Programming at Ateneo de Davao University. It is a Django 5 application on SQLite with server-rendered templates and Tailwind CSS compiled to a static stylesheet. Staff search, filter, and sort the roster, add and edit records, delete one or many behind a real confirmation page, and export whatever the current filter matches as CSV\u2014not just the page on screen. Name search, multi-select course, gender, and an inclusive age range all compose into a single queryset, and the active filters carry through sorting and pagination links. Authentication gates everything, so an anonymous visitor sees no student data at all. Sorting sets aria-sort so the order is announced rather than just drawn, deletion works with JavaScript off, and dark mode is remembered across visits and applied before first paint.",
+    techStack: ["Django", "Python", "SQLite", "Tailwind CSS"],
+    role: "Full-Stack Developer",
+    category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/EDP-IT-2241",
+    screenshots: [
+      "/images/software-engineering/mini-addu-sis/1.png",
+      "/images/software-engineering/mini-addu-sis/2.png",
+      "/images/software-engineering/mini-addu-sis/3.png"
+    ],
+    screenshotLayout: "desktop-grid",
+    tags: ["Full-Stack Development", "CRUD", "Accessibility", "Coursework"],
+  },
+  {
+    slug: "bilibili-video-frontend",
+    title: "BiliBili | Video Platform Front End",
+    shortDescription: "A video-sharing site front end with browsable feeds, a watch page, search, and profile editing. Final project for Web Systems and Technologies 1.",
+    description: "A video-sharing site front end built as the final project for Web Systems and Technologies 1. You browse the home and anime feeds, open a video to watch it alongside its description and related episodes, search the catalogue, sign in, and edit your profile\u2014with profile edits persisting between visits and the sidebar collapsing into a drawer on a phone. It is a React 18 single-page app in JavaScript with Tailwind CSS and Vite, organised as an npm workspace so the shared component library and the video catalogue live in their own packages and resolve straight to source through Vite aliases. One layout component renders the header and sidebar for every route, and a single component serves all six video pages behind a dynamic route, drawing the related list from the rest of the catalogue.",
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Vite", "npm workspaces"],
+    role: "Front End Developer",
+    category: "Software Engineering",
+    repoUrl: "https://github.com/clarknotkent/WebSys1",
+    screenshots: [
+      "/images/software-engineering/bilibili-video-frontend/1.png",
+      "/images/software-engineering/bilibili-video-frontend/2.png",
+      "/images/software-engineering/bilibili-video-frontend/3.png"
+    ],
+    screenshotLayout: "desktop-grid",
+    tags: ["Front-End Development", "Component Library", "Responsive Design"],
   },
   
   // PC Building
