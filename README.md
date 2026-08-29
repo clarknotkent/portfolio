@@ -1,123 +1,104 @@
-# Clarknotkent Portfolio
+# Portfolio — Kent Elrond Andionne Aspa
 
-Personal portfolio showcasing software engineering projects, PC builds, creative works, and the Seniors Integration Program (SIP) reflection output. Built with Next.js 16 and deployed as a static site on GitHub Pages.
+Personal portfolio presenting software engineering work, a small-form-factor PC build, and creative output. Next.js 16, statically exported, deployed to GitHub Pages.
 
-## Pages
+Product context — audience, positioning, and the constraints future work must preserve — lives in [PRODUCT.md](PRODUCT.md).
 
-- **Home** (`/`) — Hero section and introduction
-- **Projects** (`/projects`) — Tabbed showcase: Software Engineering, PC Building, Creative Works
-  - Individual detail pages at `/projects/[slug]`
-- **SIP** (`/sip`) — Seniors Integration Program output, organized into three tabs:
-  - *AdDU Journey Map* — 2022–2026 timeline with per-year reflections and images
-  - *Conversion Story* — long-form narrative in 6 sections with alternating image/text layout
-  - *SIP Passion Plan* — Personal Mission Statement, Prayer for My Future Self, and a phased 10–20 year plan
-- **About** (`/about`) — Education, organizations, volunteering, tech stack, certifications
-- **Off-Keyboard** (`/off-keyboard`) — Flag Football, Event Photography, Community Building galleries
-- **Contact** (`/contact`) — Email and social links
-
-## Tech Stack
-
-- **Framework:** Next.js 16.1.3 (App Router, Turbopack, static export)
-- **UI:** React 19.2.3, Tailwind CSS v4
-- **Animations:** Framer Motion 12
-- **Icons:** react-icons, lucide-react
-- **Utilities:** clsx, tailwind-merge, exifr (photo EXIF metadata)
-- **Language:** TypeScript 5
-- **Typography:** Inter (Google Fonts)
-
-## Getting Started
+## Running it
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build    # static export to out/
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+`dev` and `build` both run two generators first (see [Generated files](#generated-files)); never call `next build` directly or the manifests go stale.
 
-Production build:
+## Routes
 
-```bash
-npm run build
-```
+| Route | Contents |
+| --- | --- |
+| `/` | Hero — status, headline, one CTA |
+| `/projects` | Tabbed: Software Engineering (10), PC Building (1), Creative Works (2) |
+| `/projects/[slug]` | Per-project detail, screenshots, stack |
+| `/about` | Education, organisations, volunteering, stack, certifications |
+| `/off-keyboard` | Flag football, event photography, community building |
+| `/contact` | Email, LinkedIn, GitHub, Instagram |
+| `not-found` | Custom 404 |
 
-Static preview:
-
-```bash
-npx serve out
-```
-
-## Deployment
-
-Deployed to GitHub Pages via GitHub Actions (`.github/workflows`). Pushes to `master` trigger a static export build and publish. A `withBasePath` helper in [src/lib/utils.ts](src/lib/utils.ts) handles asset paths under the repo subpath.
-
-To enable: Repository Settings → Pages → Source: **GitHub Actions**.
-
-## Project Structure
+## Layout
 
 ```
 src/
 ├── app/
-│   ├── page.tsx                 # Home
-│   ├── layout.tsx               # Root layout + metadata
-│   ├── globals.css              # Tailwind base + tokens
-│   ├── projects/
-│   │   ├── page.tsx             # Tabbed showcase
-│   │   └── [slug]/
-│   │       ├── layout.tsx       # Project detail wrapper
-│   │       └── page.tsx         # Individual project detail
-│   ├── sip/page.tsx             # SIP page with Journey Map / Conversion Story / Passion Plan tabs
-│   ├── about/page.tsx
-│   ├── off-keyboard/page.tsx
-│   └── contact/page.tsx
+│   ├── layout.tsx              root layout, metadata, fonts, skip link
+│   ├── page.tsx                home
+│   ├── not-found.tsx           404
+│   ├── globals.css             tokens, shell, keyframes
+│   ├── icon.svg                favicon (the navbar mark)
+│   ├── apple-icon.png          180x180 touch icon
+│   ├── fonts/                  Valley Sans (SIL OFL — keep OFL.txt)
+│   └── <route>/
+│       ├── layout.tsx          per-route metadata (pages are client components)
+│       └── page.tsx
 ├── components/
-│   ├── common/
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
-│   ├── sections/Hero.tsx
-│   └── ui/Button.tsx
+│   ├── common/   Navbar, Footer
+│   ├── sections/ Hero
+│   └── ui/       Button
 └── lib/
-    ├── projects.ts              # Project data model
-    └── utils.ts                 # withBasePath, cn helpers
-
-public/images/
-├── conversion/                  # Reserved for Conversion Story images
-├── journey-map/                 # AdDU Journey Map year images (image.jpg … image5.jpg)
-├── photography/                 # 11 photos with EXIF metadata
-├── digital-art/                 # Digital art gallery
-├── pc/                          # PC build photos
-├── profile/                     # Profile photos
-├── event-photography/
-├── community-building/
-├── flag-football/
-└── software-engineering/        # Project screenshots grouped by stack
+    ├── projects.ts             all project content
+    ├── site.ts                 name, origin, description, OG image
+    ├── motion.ts               shared entrance/crossfade, reduced-motion aware
+    ├── utils.ts                cn(), withBasePath()
+    ├── screenshot-dims.ts      GENERATED
+    └── photo-exif.ts           GENERATED
 ```
 
-## Design System
+## Design system
 
-- **Background:** Deep Slate `#0F172A`
-- **Surfaces:** Slate Gray `#1E293B` (cards), border `#334155`
-- **Accent:** Electric Cyan `#00D9FF` (hover `#6FC3DF`)
-- **Secondary accent:** Indigo `#6366F1` (Software Engineering card hover)
-- **Text:** White `#FFFFFF` primary, `#94A3B8` muted
-- **Typography:** Inter, bold headings
-- **Layout:** Centered `max-w-6xl` containers with 8px spacing grid
-- **Motion:** Framer Motion `initial`/`whileInView` fades with light stagger; `AnimatePresence` crossfade on tab changes
+Tokens are declared in `globals.css` and exposed as Tailwind utilities through `@theme`. **Use the utilities, not hex literals** — there are currently zero arbitrary colour values in components, which is what keeps contrast from drifting.
 
-## Content Summary
+| Token | Value | Utility |
+| --- | --- | --- |
+| Canvas | `#FCFCFD` | `bg-canvas` |
+| Ink | `#09090B` | `text-ink` |
+| Surface | `#F3F4F6` | `bg-surface` |
+| Hairline | `#E5E7EB` | `border-hairline` |
+| Muted | `#71717A` | `text-muted` |
+| Muted strong | `#6B6B73` | `text-muted-strong` (on surface fills) |
+| Primary | `#4F46E5` | `text-primary` / `bg-primary` |
+| Success | `#059669` | `bg-success` |
 
-- **Projects (6):** NIP Immunization System (capstone), Health Key Pharma SCM, UniVents (Flutter), FormD T1 SFF build, Photography Portfolio, Digital Art Showcase
-- **SIP:** Full AdDU journey timeline (2022–2026), conversion narrative, and 10–20 year passion plan
-- **Organizations:** ACCESS (leadership), Davao Legionnaires, DICE
-- **Volunteering:** UXPH, UX Davao, Devcon Davao
-- **Certifications:** IBM Project Management, Cisco CCNA
+- **Type:** Valley Sans (display, self-hosted), Manrope (body), JetBrains Mono (metadata).
+- **Shape:** 2px radius. Elevation from 1px hairlines and whitespace, not shadows.
+- **Shell:** one container — 1120px max, gutters 20 / 32 / 48 — used by nav, footer, and every page.
+- **Background:** a faint 40px grid; components align to it.
+- **Motion:** 150ms hover, 200ms entry, `--ease-out`. Nothing over 300ms. `transform`/`opacity` only. `prefers-reduced-motion` honoured.
 
-## Author
+Light mode only, by design. There is no dark theme.
 
-Kent Elrond Andionne Aspa
+## Generated files
 
-- Email: kentaspa54@gmail.com
-- LinkedIn: [linkedin.com/in/clarknotkent](https://www.linkedin.com/in/clarknotkent/)
-- GitHub: [github.com/clarknotkent](https://github.com/clarknotkent)
-- Instagram: [@clarknotkent_](https://instagram.com/clarknotkent_)
+Two build-time generators keep static data out of the client bundle. Both are committed; re-run them after changing images.
 
-© 2026 Kent Elrond Andionne Aspa. All rights reserved.
+| Script | Writes | Why |
+| --- | --- | --- |
+| `npm run dims` | `src/lib/screenshot-dims.ts` | Real image dimensions, so galleries frame each image at its own ratio with no layout shift |
+| `npm run exif` | `src/lib/photo-exif.ts` | Photography EXIF baked at build time, so `exifr` never ships to the browser |
+
+## Adding a project
+
+Append a `Project` to `src/lib/projects.ts`, put screenshots in `public/images/software-engineering/<slug>/`, and run `npm run dims`. The card and detail route render automatically.
+
+Set `featured: true` to make a project span the grid row. `screenshotLayout` picks the gallery shape: `desktop-grid`, `mobile-row`, or omitted for auto.
+
+**Verify every stack claim against the project's own repository on its current branch.** This has been wrong before.
+
+## Deployment
+
+GitHub Actions builds and publishes to GitHub Pages on push to `main`/`master` (`.github/workflows/deploy.yml`).
+
+Because the site can be served from a repository subpath, `next.config.ts` derives `basePath` from `GITHUB_REPOSITORY`. **Route every asset path through `withBasePath()`** — a bare root-relative path works locally and 404s in production.
+
+Static export means no server runtime, no API routes, and `images.unoptimized`. Size images before committing them; nothing in the build will do it for you.

@@ -2,276 +2,286 @@
 
 import { projects } from "@/lib/projects";
 import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { withBasePath } from "@/lib/utils";
 
 type Category = "Software Engineering" | "PC Building" | "Creative Works";
+
+const slugify = (value: string) => value.toLowerCase().replace(/\s+/g, "-");
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("Software Engineering");
 
   const categories: Category[] = ["Software Engineering", "PC Building", "Creative Works"];
+
+  // Arrow keys move between tabs and wrap, per the WAI-ARIA tabs pattern.
+  const onTabKeyDown = (event: React.KeyboardEvent, category: Category) => {
+    const keys: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1 };
+    let next: Category | undefined;
+
+    if (event.key in keys) {
+      const index = categories.indexOf(category);
+      next = categories[(index + keys[event.key] + categories.length) % categories.length];
+    } else if (event.key === "Home") {
+      next = categories[0];
+    } else if (event.key === "End") {
+      next = categories[categories.length - 1];
+    }
+
+    if (!next) return;
+    event.preventDefault();
+    setActiveCategory(next);
+    document.getElementById(`tab-${slugify(next)}`)?.focus();
+  };
   const filteredProjects = projects.filter((p) => p.category === activeCategory);
 
   return (
-    <div id="projects-top" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="space-y-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-4"
+    <div className="shell pt-10 md:pt-20 pb-20 md:pb-[120px]">
+      {/* Page header */}
+      <div className="flex flex-col gap-6 mb-8 md:mb-10">
+        <h1
+          className="text-[36px] md:text-[48px] font-semibold text-ink leading-[1.1] tracking-[-0.02em]"
+          style={{ fontFamily: "var(--font-valley-sans)" }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Project Showcase</h1>
-          <p className="text-xl text-[#94A3B8]">
-            A unified hub of my technical projects, PC builds, and creative endeavors.
-          </p>
-        </motion.div>
-
-        {/* Category Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="border-b border-[#334155]"
+          Projects
+        </h1>
+        <p
+          className="text-base md:text-lg text-muted leading-[1.6] max-w-[68ch]"
+          style={{ fontFamily: "var(--font-manrope)" }}
         >
-          <div className="flex gap-8">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                whileTap={{ scale: 0.96 }}
-                className={`pb-4 px-1 border-b-2 transition-colors ${
-                  activeCategory === category
-                    ? "border-[#00D9FF] text-[#00D9FF] font-semibold"
-                    : "border-transparent text-[#94A3B8] hover:text-[#00D9FF] hover:border-[#00D9FF]/50"
-                }`}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+          Engineering work, hardware, and things built outside the brief.
+        </p>
+      </div>
 
-        {/* Projects Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Software Engineering */}
-            {activeCategory === "Software Engineering" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <motion.div
-                    key={project.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    whileTap={{ scale: 0.98, y: -2 }}
-                  >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="group block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#6366F1]/50 transition-colors h-full"
+      {/* Tab rail — §4.6 */}
+      <div className="border-b border-hairline mb-14 md:mb-20">
+        <div
+          role="tablist"
+          aria-label="Project categories"
+          className="flex gap-6 overflow-x-auto scrollbar-none -mb-px"
+        >
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              role="tab"
+              id={`tab-${slugify(category)}`}
+              aria-selected={activeCategory === category}
+              aria-controls={`panel-${slugify(category)}`}
+              /* Roving tabindex: the tablist is one tab stop, arrows move within it. */
+              tabIndex={activeCategory === category ? 0 : -1}
+              onKeyDown={(e) => onTabKeyDown(e, category)}
+              onClick={() => setActiveCategory(category)}
+              className={`text-xs font-medium uppercase tracking-[0.12em] leading-none whitespace-nowrap py-4 border-b-2 transition-colors duration-150 cursor-pointer ${
+                activeCategory === category
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted hover:text-ink"
+              }`}
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                transitionTimingFunction: "var(--ease-out)",
+              }}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Projects grid */}
+      {/* `key` remounts the panel on a tab change, which replays the enter
+          animation. Kept short (150ms) because this is navigation the visitor
+          repeats — long enough to explain the swap, not long enough to wait on. */}
+      <div
+        key={activeCategory}
+        className="panel-in"
+        role="tabpanel"
+        id={`panel-${slugify(activeCategory)}`}
+        aria-labelledby={`tab-${slugify(activeCategory)}`}
+        tabIndex={0}
+      >
+          {/* Software Engineering — 2-col grid */}
+          {activeCategory === "Software Engineering" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredProjects.map((project) => (
+                /* The card is a container, not a link. The title carries a
+                   stretched link so the whole card is clickable, which leaves the
+                   repository link free to be a real, focusable sibling rather than
+                   a click handler nested inside another anchor. */
+                <div
+                  key={project.slug}
+                  className={`project-card group relative bg-canvas border border-hairline focus-within:border-primary hover:border-primary transition-[border-color] duration-150 p-6 flex flex-col rounded-[2px] ${
+                    project.featured ? "md:col-span-2" : ""
+                  }`}
+                  style={{ transitionTimingFunction: "var(--ease-out)" }}
+                >
+                  <div className="flex flex-col gap-2 flex-grow">
+                    <h2
+                      className={`text-ink font-semibold leading-[1.3] tracking-normal ${
+                        project.featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"
+                      }`}
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
                     >
-                      <div className="space-y-4">
-                        {/* Role + Source */}
-                        {(project.role || project.repoUrl) && (
-                          <div className="flex flex-wrap items-center gap-2 text-sm">
-                            {project.role && (
-                              <span className="px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]">
-                                {project.role}
-                              </span>
-                            )}
-                            {project.repoUrl && (
-                              <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155] group-hover:text-[#00D9FF] group-hover:border-[#00D9FF]/50 transition-colors">
-                                <svg
-                                  className="h-3.5 w-3.5"
-                                  fill="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  aria-hidden="true"
-                                >
-                                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                                </svg>
-                                Source
-                              </span>
-                            )}
-                          </div>
-                        )}
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="after:absolute after:inset-0 after:rounded-[2px] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-1 focus-visible:after:outline-primary focus-visible:after:outline-offset-2"
+                      >
+                        {project.title}
+                      </Link>
+                    </h2>
+                    <p className="text-muted text-base leading-[1.6]">
+                      {project.shortDescription || project.description}
+                    </p>
+                  </div>
 
-                        {/* Title */}
-                        <h2 className="text-xl font-semibold text-white">
-                          {project.title}
-                        </h2>
+                  {/* Tech stack tags — §4.4 */}
+                  {project.techStack && (
+                    <div className="flex gap-2 flex-wrap mt-auto pt-4">
+                      {(project.featured ? project.techStack : project.techStack.slice(0, 4)).map((tech) => (
+                        <span
+                          key={tech}
+                          className="inline-flex items-center rounded-[2px] bg-surface border border-hairline px-2 h-6 text-ink text-xs tracking-[0.04em]"
+                          style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
-                        {/* Short Description */}
-                        <p className="text-[#94A3B8] leading-relaxed text-justify">
-                          {project.shortDescription || project.description}
-                        </p>
-
-                        {/* Tech Stack */}
-                        {project.techStack && (
-                          <div className="flex flex-wrap gap-2">
-                            {project.techStack.map((tech) => (
-                              <span
-                                key={tech}
-                                className="text-xs px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-
-                        <p className="text-sm text-[#00D9FF] font-medium inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          View Project <span aria-hidden="true">→</span>
-                        </p>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-
-            {/* PC Building */}
-            {activeCategory === "PC Building" && (
-              <div className="grid grid-cols-1 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <motion.div
-                    key={project.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    whileTap={{ scale: 0.98, y: -2 }}
-                  >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="group block bg-[#1E293B] border border-[#334155] rounded-lg p-8 hover:border-[#00D9FF]/50 transition-colors"
+                  {/* Footer */}
+                  <div className="pt-6 border-t border-hairline mt-4 flex justify-between items-center">
+                    <span
+                      className="text-primary text-sm font-medium flex items-center gap-2 tracking-[0.02em]"
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
                     >
-                      <div className="space-y-6">
-                        {/* Header */}
-                        <div className="space-y-2">
-                          <div className="text-sm">
-                            <span className="px-2 py-1 bg-[#0F172A] text-[#94A3B8] rounded border border-[#334155]">
-                              {project.role}
-                            </span>
-                          </div>
-                          <h2 className="text-2xl font-semibold text-white">
-                            {project.title}
-                          </h2>
-                          <p className="text-[#94A3B8] leading-relaxed text-justify">
-                            {project.description}
-                          </p>
-                        </div>
+                      View Architecture
+                      <span
+                        className="arrow-icon transition-transform duration-150"
+                        style={{ transitionTimingFunction: "var(--ease-out)" }}
+                        aria-hidden="true"
+                      >
+                        &rarr;
+                      </span>
+                    </span>
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.title} repository on GitHub`}
+                        className="relative z-10 -m-3 p-3 inline-flex items-center justify-center text-muted hover:text-ink focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-[2px] transition-[color,transform] duration-150 active:scale-[0.97]"
+                        style={{ transitionTimingFunction: "var(--ease-out)" }}
+                      >
+                        <svg aria-hidden="true" fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-                        {/* Spec Sheet */}
-                        {project.components && (
-                          <div className="bg-[#0F172A] border border-[#334155] rounded-lg p-6">
-                            <h3 className="text-sm font-semibold text-white mb-4">
-                              SPECIFICATIONS
-                            </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                              {project.components.map((component, idx) => (
-                                <div
-                                  key={idx}
-                                  className="flex items-center gap-2 text-sm text-[#94A3B8]"
-                                >
-                                  <div className="w-1 h-1 bg-[#00D9FF] rounded-full"></div>
-                                  <span>{component}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        <p className="text-sm text-[#00D9FF] font-medium inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          View Build Details <span aria-hidden="true">→</span>
-                        </p>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-
-            {/* Creative Works */}
-            {activeCategory === "Creative Works" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredProjects.map((project, index) => (
-                  <motion.div
-                    key={project.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    whileTap={{ scale: 0.98, y: -2 }}
-                  >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="group block bg-[#1E293B] border border-[#334155] rounded-lg p-6 hover:border-[#00D9FF]/50 transition-colors h-full"
+          {/* PC Building — single column */}
+          {activeCategory === "PC Building" && (
+            <div className="grid grid-cols-1 gap-6">
+              {filteredProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  className="project-card group bg-canvas border border-hairline hover:border-primary transition-[border-color,transform] duration-150 p-6 flex flex-col gap-6 rounded-[2px] active:scale-[0.97]"
+                  style={{ transitionTimingFunction: "var(--ease-out)" }}
+                >
+                  <div className="flex flex-col gap-2">
+                    {project.role && (
+                      <span
+                        className="text-xs text-muted uppercase tracking-[0.12em] font-medium"
+                        style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                      >
+                        {project.role}
+                      </span>
+                    )}
+                    <h2
+                      className="text-ink text-lg md:text-xl font-semibold leading-[1.3]"
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
                     >
-                      <div className="space-y-4">
-                        {/* Title */}
-                        <h2 className="text-xl font-semibold text-white">
-                          {project.title}
-                        </h2>
+                      {project.title}
+                    </h2>
+                    <p className="text-muted text-base leading-[1.6]">
+                      {project.description}
+                    </p>
+                  </div>
 
-                        {/* Description */}
-                        <p className="text-[#94A3B8] leading-relaxed text-justify">
-                          {project.description}
-                        </p>
-
-                        {/* Image Grid Preview */}
-                        <div className="grid grid-cols-3 gap-2 pt-2">
-                          {project.slug === "photography-portfolio" ? (
-                            Array.from({ length: 6 }).map((_, i) => (
-                              <div
-                                key={i}
-                                className="relative aspect-square bg-[#0F172A] border border-[#334155] rounded overflow-hidden"
-                              >
-                                <Image
-                                  src={withBasePath(`/images/photography/${i + 1}.JPG`)}
-                                  alt={`Photography ${i + 1}`}
-                                  fill
-                                  className="object-cover"
-                                  sizes="(max-width: 768px) 33vw, 16vw"
-                                />
-                              </div>
-                            ))
-                          ) : (
-                            Array.from({ length: Math.min(project.imageCount || 6, 6) }).map((_, i) => (
-                              <div
-                                key={i}
-                                className="aspect-square bg-[#0F172A] border border-[#334155] rounded flex items-center justify-center"
-                              >
-                                <span className="text-xs text-[#94A3B8]">{i + 1}</span>
-                              </div>
-                            ))
-                          )}
-                        </div>
-
-                        <p className="text-sm text-[#00D9FF] font-medium inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          View Gallery <span aria-hidden="true">→</span>
-                        </p>
+                  {/* Specs */}
+                  {project.components && (
+                    <div className="bg-surface border border-hairline rounded-[2px] p-6">
+                      <h4
+                        className="text-xs text-muted uppercase tracking-[0.12em] font-medium mb-4"
+                        style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                      >
+                        Specifications
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {project.components.map((component, idx) => (
+                          <div key={idx} className="flex items-center gap-2 text-sm text-ink">
+                            <div className="w-1 h-1 bg-primary rounded-full" />
+                            <span>{component}</span>
+                          </div>
+                        ))}
                       </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+                    </div>
+                  )}
 
-          </motion.div>
-        </AnimatePresence>
+                  <div className="pt-4 border-t border-hairline flex justify-between items-center">
+                    <span
+                      className="text-primary text-sm font-medium flex items-center gap-2 tracking-[0.02em]"
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
+                    >
+                      View build details
+                      <span className="arrow-icon transition-transform duration-150" style={{ transitionTimingFunction: "var(--ease-out)" }} aria-hidden="true">&rarr;</span>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Creative Works — 2-col grid */}
+          {activeCategory === "Creative Works" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  className="project-card group bg-canvas border border-hairline hover:border-primary transition-[border-color,transform] duration-150 p-6 flex flex-col gap-4 rounded-[2px] active:scale-[0.97]"
+                  style={{ transitionTimingFunction: "var(--ease-out)" }}
+                >
+                  <div className="flex flex-col gap-2 flex-grow">
+                    <h2
+                      className="text-ink text-lg md:text-xl font-semibold leading-[1.3]"
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
+                    >
+                      {project.title}
+                    </h2>
+                    <p className="text-muted text-base leading-[1.6]">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-hairline flex justify-between items-center">
+                    <span
+                      className="text-primary text-sm font-medium flex items-center gap-2 tracking-[0.02em]"
+                      style={{ fontFamily: "var(--font-valley-sans)" }}
+                    >
+                      View gallery
+                      <span className="arrow-icon transition-transform duration-150" style={{ transitionTimingFunction: "var(--ease-out)" }} aria-hidden="true">&rarr;</span>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );

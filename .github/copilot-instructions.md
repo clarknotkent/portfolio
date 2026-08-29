@@ -1,70 +1,58 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. -->
+# Working in this repository
 
-# Portfolio Project - Kent Elrond Andionne Aspa
+Portfolio for Kent Elrond Andionne Aspa. Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind v4, Framer Motion. Statically exported to GitHub Pages.
 
-## Project Status: High Fidelity Design Applied ✅
-Professional IT visual identity with Deep Slate theme and Electric Indigo accents.
+Read [PRODUCT.md](../PRODUCT.md) before changing anything user-facing — it records the audience, the positioning, and the facts that must not be invented. [README.md](../README.md) covers structure, tokens, and generated files.
 
-## Project Overview
-Personal portfolio built with Next.js 16.1.3, Tailwind CSS v4, Framer Motion 12.26.2, and Inter font family.
-Professional dark theme with Electric Indigo (#6366F1) primary actions.
+## Constraints that break things if ignored
 
-## Design System
-### Color Palette
-- **Background:** Deep Slate (#0F172A)
-- **Primary:** Electric Indigo (#6366F1)
-- **Primary Hover:** (#4F46E5)
-- **Cards:** Slate Gray (#1E293B)
-- **Border:** (#334155)
-- **Text Primary:** White (#FFFFFF)
-- **Text Secondary:** (#94A3B8)
+- **Static export.** `output: "export"`. No server runtime, no API routes, no database, no server actions. A feature needing a backend is out of scope.
+- **Base path.** The site may be served from a repo subpath. Every asset path goes through `withBasePath()` from `src/lib/utils.ts`. A bare root-relative path works locally and 404s in production.
+- **`images.unoptimized: true`**, forced by static export. Images ship at source resolution — size them before committing. Cap the long edge around 2000px.
+- **Two generators run before dev and build.** Use `npm run dev` / `npm run build`, never bare `next dev` / `next build`, or `screenshot-dims.ts` and `photo-exif.ts` go stale.
+- **`src/lib/screenshot-dims.ts` and `src/lib/photo-exif.ts` are generated.** Never hand-edit; run `npm run dims` / `npm run exif`.
+- **`src/app/fonts/OFL.txt` must stay.** The SIL Open Font License requires the notice to ship with the font.
 
-### Typography
-- **Font Family:** Inter (Google Fonts)
-- **Headings:** Bold, -0.02em letter spacing, 1.2 line height
-- **Body:** 1.6 line height for optimal readability
-- **Spacing:** 8px grid system (all padding/margins in multiples of 8px)
+## Design system
 
-### Components
-- **Navbar:** Slate Gray background, Electric Indigo active states
-- **Buttons:** Electric Indigo primary, hover states defined
-- **Cards:** Slate Gray (#1E293B) with subtle borders
-- **Spacing:** px-16, px-24, px-32, py-32, py-48, py-64, py-80, py-128 (8px grid)
+Tokens live in `src/app/globals.css` and are exposed as Tailwind utilities via `@theme`.
 
-## Content Structure
-### Pages
-1. **Home (/)** - Hero with full name, quote, Electric Indigo CTA buttons
-2. **Projects (/projects)** - Categorized showcase (Software, PC Building, Creative)
-3. **About (/about)** - Education, Organizations, Volunteering, Tech Stack, Certifications
-4. **Off-Keyboard (/off-keyboard)** - Flag Football, Event Photography, Community Building (slideshows)
-5. **Contact (/contact)** - Social links with optimized layout
+**Use the utilities, never hex literals.** Components currently contain zero arbitrary colour values; keep it that way. `bg-canvas`, `text-ink`, `bg-surface`, `border-hairline`, `text-muted`, `text-muted-strong`, `text-primary`, `bg-success`.
 
-### Key Data
-- **Education:** Ateneo de Davao University, BSIT (2022-2026)
-- **ACCESS Roles:** EVP (May 2025-Present), President (Jan 2024-May 2025), IVP (Apr 2023-Dec 2023)
-- **Projects:** 6 total (3 Software Engineering, 1 PC Building, 2 Creative Works)
-- **Contact:** kentaspa54@gmail.com, linkedin.com/in/clarknotkent, @clarknotkent_
+- Light mode only. There is no dark theme; do not add one.
+- Fonts: Valley Sans (display, self-hosted), Manrope (body), JetBrains Mono (metadata). Not Inter.
+- 2px radius. Elevation comes from 1px hairlines and whitespace — not shadows.
+- One shell: 1120px max-width, gutters 20 / 32 / 48. Nav, footer, and every page use it.
+- A faint 40px background grid; components align to it. This is deliberate, not decoration.
 
-## Technical Implementation
-- **Next.js Image:** Optimized image loading
-- **Framer Motion:** Smooth transitions and animations
-- **TypeScript:** Strict typing throughout
-- **Tailwind v4:** Custom CSS variables for color scheme
-- **Inter Font:** Professional typography
-- **8px Grid:** Consistent spacing system
+## Motion
 
-## Component Architecture
-- **Navbar:** Fixed positioning, 64px height, Slate Gray background
-- **Footer:** 32px padding, Slate Gray background
-- **Hero:** Electric Indigo accented quote, 32px/48px spacing
-- **Button:** Electric Indigo primary, 24px/32px padding (8px grid)
-- **Cards:** Slate Gray background with subtle borders
+`src/lib/motion.ts` holds the shared entrance and crossfade, and reads `useReducedMotion`. Reuse it rather than writing inline variants.
 
-## Image Management
-- **Location:** public/images/{category}/
-- **Categories:** flag-football, event-photography, community-building
-- **Format:** JPG/WebP, 1920x1080 recommended
-- **Loading:** Next.js Image with error handling
+- 150ms hover, 200ms entry, `var(--ease-out)`. Nothing over 300ms.
+- Animate `transform` and `opacity` only.
+- Prefer CSS transitions over JS: they are interruptible and run off the main thread.
+- Never gate content visibility on an animation completing — if it does not run, the content must still be visible.
+- Pressable elements get `active:scale-[0.97]` with `transform` in the transition list.
 
-## Repository
-https://github.com/clarknotkent/portfolio
+## Accessibility — currently clean, keep it that way
+
+Every route has one `h1`, no heading-level skips, all four landmarks, and alt text on every image.
+
+- Interactive elements are `<button>` or `<a>` — never a `<div>`/`<span>` with a click handler.
+- No interactive element nested inside another. Cards use a stretched link (`after:inset-0`) on the title so the repo link can be a real sibling.
+- Tap targets ≥44px; pad the hit area rather than enlarging the visual.
+- Focus rings on everything: `focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2`.
+- The projects tab rail implements the full WAI-ARIA tabs pattern — `tablist`/`tab`/`tabpanel`, `aria-selected`, roving tabindex, arrow keys.
+
+## Content
+
+All project content is `src/lib/projects.ts`. Adding a project is a data edit — append a `Project`, drop screenshots in `public/images/software-engineering/<slug>/`, run `npm run dims`.
+
+**Verify every stack and status claim against that project's own repository on its current branch.** This has been wrong before: Health Key was described as using Supabase when the branch in question had no database at all. When the repo and the site disagree, the repo wins.
+
+Never invent testimonials, metrics, user counts, or uptime figures. None exist.
+
+## Verify before claiming done
+
+`npm run lint`, `npx tsc --noEmit`, and `npm run build` must all pass. For anything visual, take a screenshot — a green build says nothing about whether the page renders correctly.

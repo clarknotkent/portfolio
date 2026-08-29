@@ -1,22 +1,191 @@
 @import "tailwindcss";
 
+/* ── Design tokens ────────────────────────────────────────────────── */
 :root {
-  --background: #0F172A;
-  --foreground: #FFFFFF;
+  /* Color */
+  --background: #FCFCFD;
+  --foreground: #09090B;
+  --surface: #F3F4F6;
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --border: #E5E7EB;
+  --text-muted: #71717A;
+  --text-muted-strong: #6B6B73; /* clears AA on the surface fill */
+  --accent-success: #059669;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --color-canvas: var(--background);
+  --color-ink: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-hairline: var(--border);
+  --color-muted: var(--text-muted);
+  --color-muted-strong: var(--text-muted-strong);
+  --color-success: var(--accent-success);
+  --font-display: var(--font-valley-sans);
+  --font-body: var(--font-manrope);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
+/* ── Base ─────────────────────────────────────────────────────────── */
 html {
   overflow-y: scroll;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  background-image:
+    linear-gradient(to right, #F3F4F6 1px, transparent 1px),
+    linear-gradient(to bottom, #F3F4F6 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Canonical shell ──────────────────────────────────────────────── *
+ * ONE container, used by nav, footer, and every page.
+ * max-width 1120px, gutters 20 / 32 / 48.
+ * ──────────────────────────────────────────────────────────────────── */
+.shell {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .shell {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .shell {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* ── Transition utility ───────────────────────────────────────────── */
+.transition-fast {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out);
+}
+
+/* ── Skeleton loading ─────────────────────────────────────────────── */
+@keyframes skeleton {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.2; }
+}
+.animate-skeleton {
+  animation: skeleton 1.5s ease-in-out infinite;
+}
+
+/* ── Project card hover ───────────────────────────────────────────── */
+.project-card:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Selection ────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--primary);
+  color: var(--background);
+}
+
+/* ── Status dot pulse ─────────────────────────────────────────────── */
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2.2); opacity: 0; }
+}
+.animate-dot-pulse {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+/* ── Mobile drawer body scroll lock ───────────────────────────────── */
+body.drawer-open {
+  overflow: hidden;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 100ms !important;
+  }
+  .animate-dot-pulse {
+    animation: none !important;
+  }
+  }
+
+/* ── Skip link ────────────────────────────────────────────────────── *
+ * Off-screen until focused, so keyboard users can jump the nav.
+ * ─────────────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  z-index: 60;
+  transform: translateY(-120%);
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out);
+}
+.skip-link:focus {
+  transform: translateY(0.75rem);
+  outline: 1px solid var(--primary);
+  outline-offset: 2px;
+}
+main:focus {
+  outline: none;
+}
+
+/* ── Tab panel enter ──────────────────────────────────────────────── *
+ * Replays whenever the panel remounts on a tab change. Deliberately no
+ * fill-mode: if the animation never runs the panel simply renders at its
+ * natural opacity, so content is never gated on motion completing.
+ * ─────────────────────────────────────────────────────────────────── */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.panel-in {
+  animation: panel-in 150ms var(--ease-out);
 }

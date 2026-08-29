@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local working material — kept on disk, never committed
+/design/
+/design_final/
+/skill/
+/.impeccable/
+/.claude/skills/
+/.github/agents/
+/.github/hooks/
+/.github/skills/

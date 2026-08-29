@@ -1,109 +1,114 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePageEntrance } from "@/lib/motion";
+import { useState } from "react";
+
+const EMAIL = "kentaspa54@gmail.com";
+
+const LINKS = [
+  { label: "GitHub", handle: "clarknotkent", href: "https://github.com/clarknotkent" },
+  { label: "LinkedIn", handle: "in/clarknotkent", href: "https://linkedin.com/in/clarknotkent" },
+  { label: "Instagram", handle: "@clarknotkent_", href: "https://instagram.com/clarknotkent_" },
+];
 
 export default function ContactPage() {
-  const socialLinks = [
-    {
-      platform: "Email",
-      handle: "kentaspa54@gmail.com",
-      url: "mailto:kentaspa54@gmail.com",
-      description: "Best way to reach me for professional inquiries",
-    },
-    {
-      platform: "LinkedIn",
-      handle: "linkedin.com/in/clarknotkent",
-      url: "https://www.linkedin.com/in/clarknotkent/",
-      description: "Connect with me professionally",
-    },
-    {
-      platform: "GitHub",
-      handle: "github.com/clarknotkent",
-      url: "https://github.com/clarknotkent",
-      description: "Check out my code and projects",
-    },
-    {
-      platform: "Instagram",
-      handle: "@clarknotkent_",
-      url: "https://instagram.com/clarknotkent_",
-      description: "Behind the scenes and off-keyboard moments",
-    },
-    {
-      platform: "Steam",
-      handle: "clarknotkent_",
-      url: "https://steamcommunity.com/id/clarknotkent_/",
-      description: "Add me for some competitive gaming",
-    },
-  ];
+  const pageEntrance = usePageEntrance();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = EMAIL;
+      field.setAttribute("readonly", "");
+      field.style.position = "absolute";
+      field.style.left = "-9999px";
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      document.body.removeChild(field);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="space-y-16">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-4"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold text-white">Get In Touch</h1>
-          <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed">
-            Whether you want to discuss a project, collaborate, or just connect — I&apos;m always open to new opportunities and conversations.
+    <div className="shell pt-10 md:pt-20 pb-20 md:pb-[120px]">
+      <motion.div
+        {...pageEntrance}
+        className="flex flex-col gap-12 md:gap-16"
+      >
+        <div className="flex flex-col gap-5">
+          <h1
+            className="text-[36px] md:text-[48px] font-semibold text-ink leading-[1.1] tracking-[-0.02em] text-balance"
+            style={{ fontFamily: "var(--font-valley-sans)" }}
+          >
+            Get in touch
+          </h1>
+          <p className="text-base md:text-lg text-muted leading-[1.6] max-w-[56ch]">
+            Open to junior engineering roles, and to anything worth building. Email
+            is the fastest way to reach me.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Social Links Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-8"
-        >
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-2">
-            <h2 className="text-3xl font-semibold text-white">Find Me Online</h2>
-            <div className="bg-[#1E293B] border border-[#334155] rounded-lg px-5 py-3">
-              <p className="text-sm text-[#94A3B8]">
-                I typically respond within <span className="font-semibold text-white">24-48 hours</span>
-              </p>
-            </div>
+        {/* Email — the one action on this page */}
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="inline-flex items-center min-h-11 text-xl md:text-3xl text-ink tracking-[-0.01em] underline decoration-hairline decoration-1 underline-offset-[6px] hover:decoration-primary hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-[2px] transition-[color,text-decoration-color,transform] duration-150 active:scale-[0.99]"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                transitionTimingFunction: "var(--ease-out)",
+              }}
+            >
+              {EMAIL}
+            </a>
+
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="inline-flex items-center justify-center h-11 px-4 shrink-0 border border-hairline rounded-[2px] text-xs font-medium uppercase tracking-[0.12em] text-muted hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 transition-[color,border-color,transform] duration-150 cursor-pointer active:scale-[0.99]"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                transitionTimingFunction: "var(--ease-out)",
+              }}
+            >
+              {copied ? "Copied" : "Copy"}
+            </button>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {socialLinks.map((social) => (
+
+          {/* Announced to screen readers without moving the layout */}
+          <p aria-live="polite" className="sr-only">
+            {copied ? "Email address copied to clipboard" : ""}
+          </p>
+        </div>
+
+        {/* Everywhere else */}
+        <ul className="flex flex-col border-t border-hairline max-w-[36rem]">
+          {LINKS.map((link) => (
+            <li key={link.label}>
               <a
-                key={social.platform}
-                href={social.url}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-8 bg-[#1E293B] border border-[#334155] rounded-lg hover:border-[#00D9FF]/50 hover:shadow-sm transition-all group"
+                className="group flex items-baseline justify-between gap-6 h-14 border-b border-hairline text-ink hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-[2px] transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.99]"
+                style={{ transitionTimingFunction: "var(--ease-out)" }}
               >
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2 flex-1">
-                    <h3 className="text-xl font-semibold text-white group-hover:text-[#00D9FF] transition-colors">
-                      {social.platform}
-                    </h3>
-                    <p className="text-sm text-[#94A3B8] font-mono break-all">{social.handle}</p>
-                    <p className="text-sm text-[#94A3B8] pt-1">{social.description}</p>
-                  </div>
-                  <svg
-                    className="h-5 w-5 text-[#94A3B8] group-hover:text-[#00D9FF] transition-colors flex-shrink-0 ml-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </div>
+                <span className="self-center text-base">{link.label}</span>
+                <span
+                  className="self-center text-xs text-muted group-hover:text-primary tracking-[0.04em] transition-colors duration-150"
+                  style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                >
+                  {link.handle}
+                </span>
               </a>
-            ))}
-          </div>
-        </motion.section>
-      </div>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
     </div>
   );
 }

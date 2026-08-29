@@ -12,6 +12,14 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local working material, not project source — see .gitignore.
+    "design/**",
+    "design_final/**",
+    "skill/**",
+    ".claude/**",
+    ".github/agents/**",
+    ".github/hooks/**",
+    ".github/skills/**",
   ]),
 ]);
 
